@@ -292,7 +292,7 @@ export default class AiBotConversations extends Component {
         @showLabels={{true}}
         @setPersonaId={{this.setPersonaId}}
         @setTargetRecipient={{this.setTargetRecipient}}
-      />
+      /> selam v154
 
       <div class="ai-bot-conversations__content-wrapper">
         <div class="ai-bot-conversations__title">
