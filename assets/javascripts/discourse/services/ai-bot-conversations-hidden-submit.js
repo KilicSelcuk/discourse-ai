@@ -21,11 +21,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
   uploads = [];
 
   inputValue = "";
-	
-  get olusturmazamani() {
-    return moment(`${this.date} ${this.time}`, "YYYY-MM-DD HH:mm:ss");
-  }
-	
+
   @action
   focusInput() {
     this.composer.destroyDraft();
@@ -39,16 +35,28 @@ export default class AiBotConversationsHiddenSubmit extends Service {
   async submitToBot() {
     if (
       this.inputValue.length <
-      this.siteSettings.min_personal_message_post_length
+      this.siteSettings.min_post_length
     ) {
-      return this.dialog.alert({
-        message: i18n(
-          "discourse_ai.ai_bot.conversations.min_input_length_message",
-          { count: this.siteSettings.min_personal_message_post_length }
-        ),
-        didConfirm: () => this.focusInput(),
-        didCancel: () => this.focusInput(),
-      });
+
+      /*
+      Ilk once yazi alanindaki karakter sayisini site ayarlarindaki ile karsilastirirz, ilf ile eger yazi alani yeterli karakterde degilse
+      o zaman sonraki asamaya geceriz.
+      - upload eidlen bir resim yada dosya varmi kontrol ederiz
+      - eger upload alaninda resim varsa hata mesaji cikartmayiz
+      - eger resimde yoksa demekki kullanici bos konu gondermeye calisiyor demektir ve uyari cikartiriz
+      */
+
+      // eger upload yoksa o zaman yazi alanina birseyler yazilmasi icin uyari veririz.
+      if (this.uploads && this.uploads.length < 1) {
+        return this.dialog.alert({
+          message: i18n(
+            "discourse_ai.ai_bot.conversations.min_input_length_message",
+            { count: this.siteSettings.min_post_length }
+          ),
+          didConfirm: () => this.focusInput(),
+          didCancel: () => this.focusInput(),
+        });
+      }
     }
 
     // Don't submit if there are still uploads in progress
@@ -59,7 +67,9 @@ export default class AiBotConversationsHiddenSubmit extends Service {
     }
 
     this.loading = true;
-    const title = i18n("discourse_ai.ai_bot.default_pm_prefix")+" - "+olusturmazamani;
+    //const title = i18n("discourse_ai.ai_bot.default_pm_prefix");
+    const saatcik = Date.now();
+    const title = '[Geçici baslik] - ' + saatcik;
 
     // Prepare the raw content with any uploads appended
     let rawContent = this.inputValue;
@@ -83,9 +93,8 @@ export default class AiBotConversationsHiddenSubmit extends Service {
           //archetype: "private_message",
           //target_recipients: this.targetUsername,
           //meta_data: { ai_persona_id: this.personaId },
-	create_as_post_voting: true,
-	wiki: true,
-          //category: 1,
+          //create_as_post_voting:true,
+          wiki: true,
         },
       });
 

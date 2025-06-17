@@ -288,11 +288,6 @@ export default class AiBotConversations extends Component {
   <template>
     <div class="ai-bot-conversations">
       {{bodyClass "ai-bot-conversations-page"}}
-      <AiPersonaLlmSelector
-        @showLabels={{true}}
-        @setPersonaId={{this.setPersonaId}}
-        @setTargetRecipient={{this.setTargetRecipient}}
-      /> selam v154
 
       <div class="ai-bot-conversations__content-wrapper">
         <div class="ai-bot-conversations__title">
