@@ -25,7 +25,6 @@ import {
 } from "discourse/lib/user-status-on-autocomplete";
 import { clipboardHelpers } from "discourse/lib/utilities";
 import { i18n } from "discourse-i18n";
-import AiPersonaLlmSelector from "discourse/plugins/discourse-ai/discourse/components/ai-persona-llm-selector";
 
 export default class AiBotConversations extends Component {
   @service aiBotConversationsHiddenSubmit;
@@ -288,7 +287,7 @@ export default class AiBotConversations extends Component {
   <template>
     <div class="ai-bot-conversations">
       {{bodyClass "ai-bot-conversations-page"}}
-
+  
       <div class="ai-bot-conversations__content-wrapper">
         <div class="ai-bot-conversations__title">
           {{i18n "discourse_ai.ai_bot.conversations.header"}}
