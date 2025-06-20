@@ -2,6 +2,7 @@
 
 module Jobs
   class DetectTranslateTopic < ::Jobs::Base
+    cluster_concurrency 1
     sidekiq_options retry: false
 
     def execute(args)
@@ -33,7 +34,7 @@ module Jobs
         end
       end
 
-      locales = SiteSetting.experimental_content_localization_supported_locales.split("|")
+      locales = SiteSetting.content_localization_supported_locales.split("|")
       return if locales.blank?
 
       locales.each do |locale|
