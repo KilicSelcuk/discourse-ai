@@ -67,8 +67,13 @@ export default class AiPersonaLlmSelector extends Component {
 
   set value(newValue) {
     this._value = newValue;
-    this.keyValueStore.setItem(PERSONA_SELECTOR_KEY, newValue);
-    this.args.setPersonaId(newValue);
+    // bu kismi kompiter'in id si ile degistiririz, boylece her acildiginda bu bot secili olur.
+    //this.keyValueStore.setItem(PERSONA_SELECTOR_KEY, newValue);
+    //this.args.setPersonaId(newValue);
+    this.keyValueStore.setItem(PERSONA_SELECTOR_KEY, "9");
+    this.args.setPersonaId("9");
+
+
     this.setAllowLLMSelector();
     this.resetTargetRecipients();
   }
