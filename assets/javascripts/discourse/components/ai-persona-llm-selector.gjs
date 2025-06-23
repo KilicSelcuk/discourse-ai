@@ -67,6 +67,7 @@ export default class AiPersonaLlmSelector extends Component {
 
   set value(newValue) {
     this._value = newValue;
+    // kuaza
     // bu kismi kompiter'in id si ile degistiririz, boylece her acildiginda bu bot secili olur.
     //this.keyValueStore.setItem(PERSONA_SELECTOR_KEY, newValue);
     //this.args.setPersonaId(newValue);
@@ -97,6 +98,8 @@ export default class AiPersonaLlmSelector extends Component {
 
   set currentLlm(newValue) {
     this.llm = newValue;
+    // kuaza
+    //this.keyValueStore.setItem(LLM_SELECTOR_KEY, newValue);
     this.keyValueStore.setItem(LLM_SELECTOR_KEY, newValue);
 
     this.resetTargetRecipients();
