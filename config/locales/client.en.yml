@@ -188,6 +188,8 @@ en:
         disabled: "(disabled)"
         persona: "Persona:"
         groups: "Groups:"
+        llm: "LLM:"
+        no_llm: "No LLM selected"
         no_persona: "Not set"
         no_groups: "None"
         edit: "Edit"
@@ -234,7 +236,6 @@ en:
           post_raw_translator: "Post raw translator"
           topic_title_translator: "Topic title translator"
           short_text_translator: "Short text translator"
-
 
       modals:
         select_option: "Select an option..."
@@ -328,6 +329,10 @@ en:
         back: "Back"
         name: "Name"
         edit: "Edit"
+        export: "Export"
+        import: "Import"
+        import_error_conflict: "Conflict detected importing %{name}, would you like to update the existing persona?"
+        overwrite: "Overwrite"
         description: "Description"
         no_llm_selected: "No language model selected"
         use_parent_llm: "Use personas language model"
@@ -445,6 +450,10 @@ en:
       tools:
         back: "Back"
         short_title: "Tools"
+        export: "Export"
+        import: "Import"
+        import_error_conflict: "Tool already exists, would you like to update it?"
+        overwrite: "Overwrite"
         no_tools: "You have not created any tools yet"
         name: "Name"
         name_help: "Name will show up in the Discourse UI and is the short identifier you will use to find the tool in various settings, it should be distinct (it is required)"
@@ -834,6 +843,7 @@ en:
           today: "Today"
           last_7_days: "Last 7 days"
           last_30_days: "Last 30 days"
+          upload_files: "Upload files"
       sentiments:
         dashboard:
           title: "Sentiment"
