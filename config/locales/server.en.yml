@@ -391,6 +391,12 @@ en:
         short_text_translator:
           name: "Short text translator"
           description: "Powers the translation feature by as a generic text translator, used for short texts like category names or tags"
+        spam_detector:
+          name: "Spam detector"
+          description: "Default persona powering our Spam detection feature"
+        content_creator:
+          name: "Content creator"
+          description: "Default persona powering HyDE search"
 
       topic_not_found: "Summary unavailable, topic not found!"
       summarizing: "Summarizing topic"
@@ -577,6 +583,7 @@ en:
         set_llm_first: "Set %{setting} first"
         model_unreachable: "We couldn't get a response from this model. Check your settings first."
         invalid_seeded_model: "You can't use this model with this feature"
+        invalid_persona_response_format: "The selected persona must have a response format with a boolean field names \"spam\""
         must_select_model: "You must select a LLM first"
       endpoints:
         not_configured: "%{display_name} (not configured)"
@@ -624,7 +631,7 @@ en:
       persona_already_exists: Persona with the name %{name} already exists.
       custom_tool_exists:
         one: "Custom tool with the name %{names} already exists."
-        other: "Custom tools with the names %{names} already exists."
+        other: "Custom tools with the names %{names} already exist."
   dashboard:
     problem:
       ai_llm_status: "The LLM model: %{model_name} is encountering issues. Please check the <a href='%{url}'>model's configuration page</a>."

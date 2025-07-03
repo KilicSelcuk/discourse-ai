@@ -33,7 +33,7 @@ module DiscourseAi
           row = +""
           row << ((message[:type] == :user) ? "user" : "model")
 
-          content = message[:content]
+          content = DiscourseAi::Completions::Prompt.text_only(message)
           current_tokens = @llm.tokenizer.tokenize(content).length
 
           allowed_tokens = @max_tokens - tokens
@@ -42,7 +42,12 @@ module DiscourseAi
           truncated_content = content
 
           if current_tokens > allowed_tokens
-            truncated_content = @llm.tokenizer.truncate(content, allowed_tokens)
+            truncated_content =
+              @llm.tokenizer.truncate(
+                content,
+                allowed_tokens,
+                strict: SiteSetting.ai_strict_token_counting,
+              )
             current_tokens = allowed_tokens
           end
 

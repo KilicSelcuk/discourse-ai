@@ -186,16 +186,33 @@ en:
         description: "These are the AI features available to visitors on your site. These can be configured to use specific personas and LLMs, and can be access controlled by groups."
         back: "Back"
         disabled: "(disabled)"
-        persona: "Persona:"
+        persona:
+          one: "Persona:"
+          other: "Personas:"
         groups: "Groups:"
-        llm: "LLM:"
+        llm:
+          one: "LLM:"
+          other: "LLMs:"
         no_llm: "No LLM selected"
         no_persona: "Not set"
         no_groups: "None"
         edit: "Edit"
+        expand_list:
+          one: "(%{count} more)"
+          other: "(%{count} more)"
+        collapse_list: "(show less)"
+        bot:
+          bot: "Chatbot"
+          name: "Bot"
+          description: "A chat bot that can answer questions and assist users in personal messages, forum and in chat"
         nav:
           configured: "Configured"
           unconfigured: "Unconfigured"
+        filters:
+          all: "All"
+          text: "Search features, personas, LLMs, or groups..."
+          no_results: "No features found matching your filters."
+          reset: "Reset"
         summarization:
           name: "Summaries"
           description: "Makes a summarization button available that allows visitors to summarize topics"
@@ -205,6 +222,10 @@ en:
           name: "Search"
           description: "Enhances search experience by providing AI-generated answers to queries"
           discoveries: "Discoveries"
+        embeddings:
+          name: "Embeddings"
+          description: "Powers features like Related Topics and AI Search by generating semantic representations of text"
+          hyde: "HyDE"
         discord:
           name: "Discord integration"
           description: "Adds the ability to search Discord channels"
@@ -218,7 +239,7 @@ en:
 
         ai_helper:
           name: "Helper"
-          description: "Assists users in community interaction, such as creating topics, writing posts, and reading content."
+          description: "Assists users in community interaction, such as creating topics, writing posts, and reading content"
           proofread: Proofread text
           title_suggestions: "Suggest titles"
           explain: "Explain"
@@ -236,6 +257,11 @@ en:
           post_raw_translator: "Post raw translator"
           topic_title_translator: "Topic title translator"
           short_text_translator: "Short text translator"
+        
+        spam:
+          name: "Spam"
+          description: "Identifies potential spam using the selected LLM and flags it for site moderators to inspect in the review queue"
+          inspect_posts: "Inspect posts"
 
       modals:
         select_option: "Select an option..."
@@ -248,6 +274,7 @@ en:
         short_title: "Spam"
         title: "Configure spam handling"
         select_llm: "Select LLM"
+        select_persona: "Select persona"
         custom_instructions: "Custom instructions"
         custom_instructions_help: "Custom instructions specific to your site to help guide the AI in identifying spam, e.g. 'Be more aggressive about scanning posts not in English'."
         last_seven_days: "Last 7 days"

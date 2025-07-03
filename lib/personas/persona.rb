@@ -68,6 +68,8 @@ module DiscourseAi
             PostRawTranslator => -28,
             TopicTitleTranslator => -29,
             ShortTextTranslator => -30,
+            SpamDetector => -31,
+            ContentCreator => -32,
           }
         end
 
@@ -364,7 +366,7 @@ module DiscourseAi
 
         # first response
         if latest_interactions.length == 1
-          consolidated_question = latest_interactions[0][:content]
+          consolidated_question = DiscourseAi::Completions::Prompt.text_only(latest_interactions[0])
         else
           consolidated_question =
             DiscourseAi::Personas::QuestionConsolidator.consolidate_question(

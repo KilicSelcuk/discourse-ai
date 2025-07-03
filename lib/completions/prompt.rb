@@ -5,8 +5,16 @@ module DiscourseAi
     class Prompt
       INVALID_TURN = Class.new(StandardError)
 
-      attr_reader :messages, :tools
+      attr_reader :messages, :tools, :system_message_text
       attr_accessor :topic_id, :post_id, :max_pixels, :tool_choice
+
+      def self.text_only(message)
+        if message[:content].is_a?(Array)
+          message[:content].map { |element| element if element.is_a?(String) }.compact.join
+        else
+          message[:content]
+        end
+      end
 
       def initialize(
         system_message_text = nil,
@@ -28,8 +36,10 @@ module DiscourseAi
         @messages = []
 
         if system_message_text
-          system_message = { type: :system, content: system_message_text }
-          @messages << system_message
+          @system_message_text = system_message_text
+          @messages << { type: :system, content: @system_message_text }
+        else
+          @system_message_text = messages.find { |m| m[:type] == :system }&.dig(:content)
         end
 
         @messages.concat(messages)
@@ -142,14 +152,6 @@ module DiscourseAi
         end
 
         []
-      end
-
-      def text_only(message)
-        if message[:content].is_a?(Array)
-          message[:content].map { |element| element if element.is_a?(String) }.compact.join
-        else
-          message[:content]
-        end
       end
 
       def encode_upload(upload_id)
