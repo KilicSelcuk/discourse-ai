@@ -11,7 +11,7 @@
 # gem "tokenizers", "0.5.4"
 gem "tiktoken_ruby", "0.0.11.1"
 gem "discourse_ai-tokenizers", "0.3.1", require_name: "discourse_ai/tokenizers"
-gem "ed25519", "1.2.4" #TODO remove this as existing ssl gem should handle this
+# gem "ed25519", "1.2.4" #TODO remove this as existing ssl gem should handle this
 
 # we probably want to move all dependencies directly in to the Discourse Gemfile, this
 # will give us a strong guarantee that the dependencies are compatible and keep getting upgraded
