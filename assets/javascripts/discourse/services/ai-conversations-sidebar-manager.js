@@ -102,6 +102,10 @@ export default class AiConversationsSidebarManager extends Service {
 
     this.sidebarState.isForcingSidebar = true;
 
+    // bunu eklersen sidebar ana sidebar olur chat sayfasinda.
+    // kuaza
+    // return true;
+
     return true;
     // calling this before fetching data
     // helps avoid flash of main sidebar mode
