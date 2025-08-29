@@ -19,7 +19,7 @@ gem "Ascii85", "2.0.1", require: false
 gem "ruby-rc4", "0.1.5", require: false
 gem "hashery", "2.1.2", require: false
 gem "ttfunk", "1.8.0", require: false
-gem "afm", "0.2.2", require: false
+# gem "afm", "0.2.2", require: false
 # all above are required by pdf-reader
 gem "pdf-reader", "2.14.1", require: false
 
