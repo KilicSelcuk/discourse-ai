@@ -106,7 +106,9 @@ export default class AiConversationsSidebarManager extends Service {
     // kuaza
     // return true;
 
-    return true;
+    //return true;
+
+    
     // calling this before fetching data
     // helps avoid flash of main sidebar mode
     this.sidebarState.setPanel(AI_CONVERSATIONS_PANEL);
