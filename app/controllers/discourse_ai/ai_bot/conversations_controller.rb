@@ -12,8 +12,7 @@ module DiscourseAi
 
         base_query =
           Topic
-            # kuaza
-            #//.private_messages_for_user(current_user)
+            .private_messages_for_user(current_user)
             .where(user: current_user) # Only show PMs where the current user is the author
             .joins(
               "INNER JOIN topic_custom_fields tcf ON tcf.topic_id = topics.id
