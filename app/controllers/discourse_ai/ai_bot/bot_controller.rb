@@ -94,7 +94,11 @@ module DiscourseAi
                 query: query,
                 context: context,
               ),
-            archetype: Archetype.private_message,
+            archetype: Archetype.regular,
+
+            // kuaza  
+            //archetype: Archetype.private_message,
+
             target_usernames: bot_username,
             skip_validations: true,
           )
