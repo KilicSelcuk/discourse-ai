@@ -96,8 +96,8 @@ module DiscourseAi
               ),
             archetype: Archetype.regular,
 
-            // kuaza  
-            //archetype: Archetype.private_message,
+            ##kuaza  
+            ##archetype: Archetype.private_message,
 
             target_usernames: bot_username,
             skip_validations: true,
