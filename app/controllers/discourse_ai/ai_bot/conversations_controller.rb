@@ -15,6 +15,7 @@ module DiscourseAi
             # kuaza
             # Bu kisim daki ayarlari kaldirdim, boylece ai sayfasinda sidebarda kullanicinin butun mesajlari listelenir.
             #.private_messages_for_user(current_user)
+            .where(archetype: regular OR archetype: private_message)
             .where(user: current_user) # Only show PMs where the current user is the author
             #.joins(
             #  "INNER JOIN topic_custom_fields tcf ON tcf.topic_id = topics.id
