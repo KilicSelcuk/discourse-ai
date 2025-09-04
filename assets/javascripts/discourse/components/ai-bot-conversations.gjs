@@ -359,7 +359,6 @@ export default class AiBotConversations extends Component {
         @personaName={{@controller.persona}}
         @llmName={{@controller.llm}}
       />
-  selam kuaza
       <div class="ai-bot-conversations__content-wrapper">
         <div class="ai-bot-conversations__title">
           {{i18n "discourse_ai.ai_bot.conversations.header"}}
