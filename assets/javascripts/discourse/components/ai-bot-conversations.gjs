@@ -405,7 +405,7 @@ export default class AiBotConversations extends Component {
           />
         </div>
 
-        <p class="ai-disclaimer">Kuaza: 
+        <p class="ai-disclaimer">
           {{i18n "discourse_ai.ai_bot.conversations.disclaimer"}}
         </p>
 
