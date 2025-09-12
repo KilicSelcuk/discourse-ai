@@ -36,7 +36,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
       this.inputValue.length <
       this.siteSettings.min_personal_message_post_length
     ) {
-      // kuaza
+
       /*
       Ilk once yazi alanindaki karakter sayisini site ayarlarindaki ile karsilastirirz, ilf ile eger yazi alani yeterli karakterde degilse
       o zaman sonraki asamaya geceriz.
@@ -66,9 +66,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
     }
 
     this.loading = true;
-    //const title = i18n("discourse_ai.ai_bot.default_pm_prefix");
-    const saatcik = Date.now();
-    const title = '[Geçici başlık] - ' + saatcik;
+    const title = i18n("discourse_ai.ai_bot.default_pm_prefix");
 
     // Prepare the raw content with any uploads appended
     let rawContent = this.inputValue;
@@ -83,7 +81,6 @@ export default class AiBotConversationsHiddenSubmit extends Service {
       });
     }
 
-    // kuaza
     try {
       const response = await ajax("/posts.json", {
         method: "POST",
