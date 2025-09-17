@@ -94,7 +94,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
           target_recipients: "kompiter", //this.targetUsername,
           meta_data: { ai_persona_id: 9 /*this.personaId*/ },
           //create_as_post_voting:true,
-          //wiki: true,
+          wiki: true,
         },
       });
 

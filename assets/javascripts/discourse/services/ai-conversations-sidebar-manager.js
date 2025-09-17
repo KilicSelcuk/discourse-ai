@@ -102,10 +102,6 @@ export default class AiConversationsSidebarManager extends Service {
 
     this.sidebarState.isForcingSidebar = true;
 
-    // kuaza
-    return true;
-
-    
     // calling this before fetching data
     // helps avoid flash of main sidebar mode
     this.sidebarState.setPanel(AI_CONVERSATIONS_PANEL);
