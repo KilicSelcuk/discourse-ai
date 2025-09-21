@@ -90,11 +90,11 @@ export default class AiBotConversationsHiddenSubmit extends Service {
         data: {
           raw: rawContent,
           title,
-          archetype: this.personaId == 28 ? "private_message" : "regular",
-          target_recipients: "kompiter", //this.targetUsername,
-          meta_data: { ai_persona_id: 9 /*this.personaId*/ },
+          archetype: this.personaId === 28 ? "private_message" : "regular",
+          target_recipients: this.targetUsername, //"kompiter"
+          meta_data: { ai_persona_id: this.personaId /*9*/ },
           //create_as_post_voting:true,
-          wiki: true,
+          //wiki: true,
         },
       });
 
