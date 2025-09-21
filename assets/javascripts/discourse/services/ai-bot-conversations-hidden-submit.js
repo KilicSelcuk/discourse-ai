@@ -68,7 +68,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
     this.loading = true;
     //const title = i18n("discourse_ai.ai_bot.default_pm_prefix");
     const saatcik = Date.now();
-    const title = '[Geçici başlık] - ' + saatcik;
+    const title = '[Geçici başlık] - ' + saatcik + ' -' + this.personaId;
 
     // Prepare the raw content with any uploads appended
     let rawContent = this.inputValue;
@@ -90,7 +90,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
         data: {
           raw: rawContent,
           title,
-          archetype: this.personaId === 28 ? "private_message" : "regular",
+          archetype: this.personaId == "28" ? "private_message" : "regular",
           target_recipients: this.targetUsername, //"kompiter"
           meta_data: { ai_persona_id: this.personaId /*9*/ },
           //create_as_post_voting:true,
