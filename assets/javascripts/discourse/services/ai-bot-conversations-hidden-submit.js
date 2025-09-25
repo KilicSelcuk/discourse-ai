@@ -99,6 +99,18 @@ export default class AiBotConversationsHiddenSubmit extends Service {
             //wiki: true,
           },
         });
+
+      // Reset uploads after successful submission
+      this.inputValue = "";
+
+      this.appEvents.trigger("discourse-ai:bot-pm-created", {
+        id: response.topic_id,
+        slug: response.topic_slug,
+        title,
+      });
+
+      this.router.transitionTo(response.post_url);
+      
       } else {
         const response = await ajax("/posts.json", {
           method: "POST",
@@ -113,7 +125,6 @@ export default class AiBotConversationsHiddenSubmit extends Service {
             wiki: true,
           },
         });
-      }
 
       // Reset uploads after successful submission
       this.inputValue = "";
@@ -125,6 +136,8 @@ export default class AiBotConversationsHiddenSubmit extends Service {
       });
 
       this.router.transitionTo(response.post_url);
+      }
+
     } finally {
       this.loading = false;
     }
