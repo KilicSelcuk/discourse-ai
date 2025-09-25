@@ -85,19 +85,35 @@ export default class AiBotConversationsHiddenSubmit extends Service {
 
     // kuaza
     try {
-      const response = await ajax("/posts.json", {
-        method: "POST",
-        data: {
-          raw: rawContent,
-          title,
-          archetype: this.personaId == "28" ? "private_message" : "regular",
-          target_recipients: this.targetUsername, //"kompiter"
-          meta_data: { ai_persona_id: this.personaId /*9*/ },
-          tags: [this.targetUsername]
-          //create_as_post_voting:true,
-          //wiki: true,
-        },
-      });
+      if(this.personaId == "28"){
+        const response = await ajax("/posts.json", {
+          method: "POST",
+          data: {
+            raw: rawContent,
+            title,
+            archetype: "private_message",
+            target_recipients: this.targetUsername, //"kompiter"
+            meta_data: { ai_persona_id: this.personaId /*9*/ },
+            //tags: [this.targetUsername]
+            //create_as_post_voting:true,
+            //wiki: true,
+          },
+        });
+      } else {
+        const response = await ajax("/posts.json", {
+          method: "POST",
+          data: {
+            raw: rawContent,
+            title,
+            archetype: "regular",
+            target_recipients: this.targetUsername, //"kompiter"
+            meta_data: { ai_persona_id: this.personaId /*9*/ },
+            tags: [this.targetUsername],
+            create_as_post_voting:true,
+            wiki: true,
+          },
+        });
+      }
 
       // Reset uploads after successful submission
       this.inputValue = "";
