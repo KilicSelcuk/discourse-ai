@@ -32,7 +32,11 @@ function initializeAIBotReplies(api) {
     subscribe: function () {
       this._super();
 
- 
+      if (
+        this.model.isPrivateMessage &&
+        this.model.details.allowed_users &&
+        this.model.details.allowed_users.filter(isGPTBot).length >= 1
+      ) {
         // we attempt to recover the last message in the bus
         // so we subscribe at -2
         this.messageBus.subscribe(
@@ -40,7 +44,7 @@ function initializeAIBotReplies(api) {
           this.onAIBotStreamedReply.bind(this),
           -2
         );
-     
+      }
     },
     unsubscribe: function () {
       this.messageBus.unsubscribe("discourse-ai/ai-bot/topic/*");
@@ -161,7 +165,7 @@ export default {
   initialize(container) {
     const user = container.lookup("service:current-user");
 
-    if (user?.ai_enabled_chat_bots) {
+    //if (user?.ai_enabled_chat_bots) {
       allowDebug = user.can_debug_ai_bot_conversations;
 
       withPluginApi((api) => {
@@ -172,6 +176,6 @@ export default {
         initializeShareButton(api, container);
         initializeShareTopicButton(api, container);
       });
-    }
+    //}
   },
 };
