@@ -32,7 +32,11 @@ function initializeAIBotReplies(api) {
     subscribe: function () {
       this._super();
 
-   
+      if (
+        this.model.isPrivateMessage &&
+        this.model.details.allowed_users &&
+        this.model.details.allowed_users.filter(isGPTBot).length >= 1
+      ) {
         // we attempt to recover the last message in the bus
         // so we subscribe at -2
         this.messageBus.subscribe(
@@ -40,7 +44,7 @@ function initializeAIBotReplies(api) {
           this.onAIBotStreamedReply.bind(this),
           -2
         );
-      
+      }
     },
     unsubscribe: function () {
       this.messageBus.unsubscribe("discourse-ai/ai-bot/topic/*");
