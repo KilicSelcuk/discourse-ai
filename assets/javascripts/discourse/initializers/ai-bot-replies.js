@@ -165,7 +165,7 @@ export default {
   initialize(container) {
     const user = container.lookup("service:current-user");
 
-    //if (user?.ai_enabled_chat_bots) {
+    if (user?.ai_enabled_chat_bots) {
       allowDebug = user.can_debug_ai_bot_conversations;
 
       withPluginApi((api) => {
@@ -176,6 +176,6 @@ export default {
         initializeShareButton(api, container);
         initializeShareTopicButton(api, container);
       });
-    //}
+    }
   },
 };
