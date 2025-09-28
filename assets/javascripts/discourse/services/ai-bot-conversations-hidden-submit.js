@@ -34,7 +34,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
   async submitToBot(uploadData) {
     if (
       this.inputValue.length <
-      this.siteSettings.min_personal_message_post_length
+      this.siteSettings.min_post_length
     ) {
       // kuaza
       /*
