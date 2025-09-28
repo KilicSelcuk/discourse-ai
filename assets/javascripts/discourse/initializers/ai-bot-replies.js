@@ -33,9 +33,9 @@ function initializeAIBotReplies(api) {
       this._super();
 
       if (
-        this.model.isPrivateMessage &&
-        this.model.details.allowed_users &&
-        this.model.details.allowed_users.filter(isGPTBot).length >= 1
+        //this.model.isPrivateMessage &&
+        this.model.details.allowed_users /*&&
+        this.model.details.allowed_users.filter(isGPTBot).length >= 1*/
       ) {
         // we attempt to recover the last message in the bus
         // so we subscribe at -2
@@ -108,7 +108,7 @@ function initializeDebugButton(api) {
   api.registerValueTransformer(
     "post-menu-buttons",
     ({ value: dag, context: { post, firstButtonKey } }) => {
-      if (post.topic?.archetype === "private_message") {
+      if (post.topic?.archetype === "private_message" || post.topic?.archetype === "regular") {
         dag.add("ai-debug", AiDebugButton, {
           before: firstButtonKey,
           after: "ai-share",
@@ -127,7 +127,7 @@ function initializeShareButton(api) {
   api.registerValueTransformer(
     "post-menu-buttons",
     ({ value: dag, context: { post, firstButtonKey } }) => {
-      if (post.topic?.archetype === "private_message") {
+      if (post.topic?.archetype === "private_message" || post.topic?.archetype === "regular") {
         dag.add("ai-share", AiShareButton, {
           before: firstButtonKey,
         });

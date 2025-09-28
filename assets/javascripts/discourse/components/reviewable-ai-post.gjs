@@ -14,13 +14,13 @@ const ReviewableAiPost = <template>
 
   <div class="post-contents-wrapper">
     <ReviewableCreatedBy @user={{@reviewable.target_created_by}} @tagName="" />
-    <div class="post-contents">
+    <div class="post-contents">55555
       <ReviewablePostHeader
         @reviewable={{@reviewable}}
         @createdBy={{@reviewable.target_created_by}}
         @tagName=""
       />
-      <div class="post-body">
+      <div class="post-body"> hgf g fhgf
         {{#if @reviewable.blank_post}}
           <p>{{i18n "review.deleted_post"}}</p>
         {{else}}

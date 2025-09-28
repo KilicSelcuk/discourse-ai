@@ -1,7 +1,7 @@
 const indicatorDots = [".", ".", "."];
-const AiIndicatorWave = <template>
+const AiIndicatorWave = <template>hhhj
   {{#if @loading}}
-    <span class="ai-indicator-wave">
+    <span class="ai-indicator-wave">fg
       {{#each indicatorDots as |dot|}}
         <span class="ai-indicator-wave__dot">{{dot}}</span>
       {{/each}}
