@@ -45,7 +45,7 @@ export default class ReviewableAiChatMessage extends Component {
           @tagName=""
         />
 
-        <div class="post-body">
+        <div class="post-body">regfre gdfg dfg 
           {{htmlSafe
             (or @reviewable.payload.message_cooked @reviewable.cooked)
           }}
