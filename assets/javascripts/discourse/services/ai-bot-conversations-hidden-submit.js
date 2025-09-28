@@ -85,18 +85,20 @@ export default class AiBotConversationsHiddenSubmit extends Service {
 
     // kuaza
     try {
-      const response = await ajax("/posts.json", {
-        method: "POST",
-        data: {
-          raw: rawContent,
-          title,
-          archetype: this.personaId == 28 ? "private_message" : "regular",
-          target_recipients: "kompiter", //this.targetUsername,
-          meta_data: { ai_persona_id: 9 /*this.personaId*/ },
-          //create_as_post_voting:true,
-          wiki: true,
-        },
-      });
+      if(this.personaId == "28"){
+        const response = await ajax("/posts.json", {
+          method: "POST",
+          data: {
+            raw: rawContent,
+            title,
+            archetype: "private_message",
+            target_recipients: this.targetUsername, //"kompiter"
+            meta_data: { ai_persona_id: this.personaId /*9*/ },
+            //tags: [this.targetUsername]
+            //create_as_post_voting:true,
+            //wiki: true,
+          },
+        });
 
       // Reset uploads after successful submission
       this.inputValue = "";
@@ -108,6 +110,34 @@ export default class AiBotConversationsHiddenSubmit extends Service {
       });
 
       this.router.transitionTo(response.post_url);
+
+      } else {
+        const response = await ajax("/posts.json", {
+          method: "POST",
+          data: {
+            raw: rawContent,
+            title,
+            archetype: "regular",
+            target_recipients: this.targetUsername, //"kompiter"
+            meta_data: { ai_persona_id: this.personaId /*9*/ },
+            tags: [this.targetUsername],
+            //create_as_post_voting:true,
+            wiki: true,
+          },
+        });
+
+      // Reset uploads after successful submission
+      this.inputValue = "";
+
+      this.appEvents.trigger("topic:created", {
+        id: response.topic_id,
+        slug: response.topic_slug,
+        title,
+      });
+
+      this.router.transitionTo(response.post_url);
+      }
+
     } finally {
       this.loading = false;
     }

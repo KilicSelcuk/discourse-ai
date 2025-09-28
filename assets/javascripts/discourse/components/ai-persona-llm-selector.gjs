@@ -75,7 +75,7 @@ export default class AiPersonaLlmSelector extends Component {
     //this.keyValueStore.setItem(PERSONA_SELECTOR_KEY, newValue);
     //this.args.setPersonaId(newValue);
     this.keyValueStore.setItem(PERSONA_SELECTOR_KEY, "9");
-    this.args.setPersonaId("9");
+    this.args.setPersonaId(newValue);
     
     this.setAllowLLMSelector();
     this.resetTargetRecipients();
