@@ -612,3 +612,10 @@ discourse_ai:
   ai_artifact_max_keys_per_user_per_artifact:
     default: 100
     hidden: true
+  ai_kuaza_enabled:
+    default: false
+    client: true
+  ai_kuaza_upload_iconu:
+    default: "upload"
+  ai_kuaza_gonderme_iconu:
+    default: "paper-plane"

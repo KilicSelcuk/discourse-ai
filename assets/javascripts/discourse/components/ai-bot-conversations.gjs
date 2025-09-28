@@ -329,7 +329,7 @@ export default class AiBotConversations extends Component {
 
         <div class="ai-bot-conversations__input-wrapper">
           <DButton
-            @icon="upload"
+            @icon="{{this.siteSettings.ai_kuaza_upload_iconu}}"
             @action={{this.openFileUpload}}
             @title="discourse_ai.ai_bot.conversations.upload_files"
             class="btn btn-transparent ai-bot-upload-btn"
@@ -347,7 +347,7 @@ export default class AiBotConversations extends Component {
           />
           <DButton
             @action={{this.prepareAndSubmitToBot}}
-            @icon="paper-plane"
+            @icon="{{this.siteSettings.ai_kuaza_gonderme_iconu}}"
             @isLoading={{this.loading}}
             @title="discourse_ai.ai_bot.conversations.header"
             class="ai-bot-button btn-transparent ai-conversation-submit"
