@@ -7,6 +7,7 @@ import { getUploadMarkdown } from "discourse/lib/uploads";
 import { i18n } from "discourse-i18n";
 
 export default class AiBotConversationsHiddenSubmit extends Service {
+  @service aiConversationsSidebarManager;
   @service appEvents;
   @service composer;
   @service dialog;
@@ -33,7 +34,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
   async submitToBot(uploadData) {
     if (
       this.inputValue.length <
-      this.siteSettings.min_personal_message_post_length
+      this.siteSettings.min_post_length
     ) {
       // kuaza
       /*
@@ -84,6 +85,8 @@ export default class AiBotConversationsHiddenSubmit extends Service {
 
     // kuaza
     try {
+
+      if(this.siteSettings.ai_kuaza_enabled){
       if(this.personaId == "28"){
         const response = await ajax("/posts.json", {
           method: "POST",
@@ -136,6 +139,34 @@ export default class AiBotConversationsHiddenSubmit extends Service {
 
       this.router.transitionTo(response.post_url);
       }
+
+      } else {
+        // ayar kapaliysa default ayarlari kullaniriz.
+
+      const response = await ajax("/posts.json", {
+        method: "POST",
+        data: {
+          raw: rawContent,
+          title,
+          archetype: "private_message",
+          target_recipients: this.targetUsername,
+          meta_data: { ai_persona_id: this.personaId },
+        },
+      });
+
+      // Reset uploads after successful submission
+      this.inputValue = "";
+
+      this.appEvents.trigger("discourse-ai:bot-pm-created", {
+        id: response.topic_id,
+        slug: response.topic_slug,
+        title,
+      });
+
+      this.router.transitionTo(response.post_url);
+      
+      
+      }//this.siteSettings.ai_kuaza_enabled kapanis
 
     } finally {
       this.loading = false;
