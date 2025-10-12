@@ -34,7 +34,7 @@ export default class AiPersonaLlmSelector extends Component {
   }
 
   get hasLlmSelector() {
-    return this.currentUser.ai_enabled_chat_bots.any((bot) => !bot.is_persona);
+    return this.currentUser.ai_enabled_chat_bots.some((bot) => !bot.is_persona);
   }
 
   get botOptions() {
@@ -74,7 +74,7 @@ export default class AiPersonaLlmSelector extends Component {
     // bu kismi kompiter'in id si ile degistiririz, boylece her acildiginda bu bot secili olur.
     //this.keyValueStore.setItem(PERSONA_SELECTOR_KEY, newValue);
     //this.args.setPersonaId(newValue);
-    this.keyValueStore.setItem(PERSONA_SELECTOR_KEY, "9");
+    this.keyValueStore.setItem(PERSONA_SELECTOR_KEY, newValue);
     this.args.setPersonaId(newValue);
     
     this.setAllowLLMSelector();
@@ -170,7 +170,7 @@ export default class AiPersonaLlmSelector extends Component {
     this._value = this.botOptions[0].id;
     if (personaId) {
       personaId = parseInt(personaId, 10);
-      if (this.botOptions.any((bot) => bot.id === personaId)) {
+      if (this.botOptions.some((bot) => bot.id === personaId)) {
         this._value = personaId;
       }
     }

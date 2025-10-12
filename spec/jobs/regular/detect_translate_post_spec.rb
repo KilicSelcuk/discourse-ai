@@ -1,13 +1,20 @@
 # frozen_string_literal: true
 
 describe Jobs::DetectTranslatePost do
-  fab!(:post)
   subject(:job) { described_class.new }
+
+  fab!(:post)
 
   let(:locales) { %w[en ja] }
 
   before do
     assign_fake_provider_to(:ai_default_llm_model)
+    # fake provider (Completions::Endpoints::Fake) returns translated text that includes this svg
+    stub_request(:get, "https://meta.discourse.org/images/discourse-logo.svg").to_return(
+      status: 200,
+      body: "",
+    )
+
     enable_current_plugin
     SiteSetting.ai_translation_enabled = true
     SiteSetting.content_localization_supported_locales = locales.join("|")
@@ -109,7 +116,7 @@ describe Jobs::DetectTranslatePost do
     fab!(:private_topic) { Fabricate(:topic, category: private_category) }
     fab!(:private_post) { Fabricate(:post, topic: private_topic) }
 
-    fab!(:personal_pm_topic) { Fabricate(:private_message_topic) }
+    fab!(:personal_pm_topic, :private_message_topic)
     fab!(:personal_pm_post) { Fabricate(:post, topic: personal_pm_topic) }
 
     fab!(:group_pm_topic) do

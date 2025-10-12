@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 describe Jobs::DetectTranslateTopic do
-  fab!(:topic)
   subject(:job) { described_class.new }
+
+  fab!(:topic)
 
   let(:locales) { %w[en ja] }
 
@@ -99,7 +100,7 @@ describe Jobs::DetectTranslateTopic do
     fab!(:private_category) { Fabricate(:private_category, group: Group[:staff]) }
     fab!(:private_topic) { Fabricate(:topic, category: private_category) }
 
-    fab!(:personal_pm_topic) { Fabricate(:private_message_topic) }
+    fab!(:personal_pm_topic, :private_message_topic)
 
     fab!(:group_pm_topic) do
       Fabricate(:group_private_message_topic, recipient_group: Fabricate(:group))

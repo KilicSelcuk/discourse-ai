@@ -13,24 +13,26 @@ module DiscourseAi
           return(
             render json:
                      base_result.merge(
-                       { translation_progress: [], total: 0, posts_with_detected_locale: 0 },
+                       {
+                         translation_progress: [],
+                         total: 0,
+                         posts_with_detected_locale: 0,
+                         no_locales_configured: true,
+                       },
                      )
           )
         end
 
         candidates = DiscourseAi::Translation::PostCandidates
-
-        result =
-          supported_locales.map do |locale|
-            candidates.get_completion_per_locale(locale) in { total:, done: }
-            { locale:, total:, done: }
-          end
-
         candidates.get_total_and_with_locale_count in { total:, posts_with_detected_locale: }
 
         render json:
                  base_result.merge(
-                   { translation_progress: result, total:, posts_with_detected_locale: },
+                   {
+                     translation_progress: candidates.get_completion_all_locales,
+                     total:,
+                     posts_with_detected_locale:,
+                   },
                  )
       end
 
@@ -44,6 +46,7 @@ module DiscourseAi
             DiscourseAi::Translation.enabled? &&
               SiteSetting.ai_translation_backfill_max_age_days > 0,
           backfill_enabled: DiscourseAi::Translation.backfill_enabled?,
+          translation_enabled: SiteSetting.ai_translation_enabled,
         }
       end
     end
