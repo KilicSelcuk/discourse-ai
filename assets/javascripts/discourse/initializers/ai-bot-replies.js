@@ -33,7 +33,7 @@ function initializeAIBotReplies(api) {
       this._super();
 
       if (
-        //this.model.isPrivateMessage &&
+        this.model.isPrivateMessage &&
         this.model.details.allowed_users &&
         this.model.details.allowed_users.filter(isGPTBot).length >= 1
       ) {
@@ -108,7 +108,7 @@ function initializeDebugButton(api) {
   api.registerValueTransformer(
     "post-menu-buttons",
     ({ value: dag, context: { post, firstButtonKey } }) => {
-      if (post.topic?.archetype === "regular") {
+      if (post.topic?.archetype === "private_message") {
         dag.add("ai-debug", AiDebugButton, {
           before: firstButtonKey,
           after: "ai-share",
@@ -127,7 +127,7 @@ function initializeShareButton(api) {
   api.registerValueTransformer(
     "post-menu-buttons",
     ({ value: dag, context: { post, firstButtonKey } }) => {
-      if (post.topic?.archetype === "regular") {
+      if (post.topic?.archetype === "private_message") {
         dag.add("ai-share", AiShareButton, {
           before: firstButtonKey,
         });

@@ -73,7 +73,7 @@ module DiscourseAi
         plugin.register_topic_custom_field_type(TOPIC_AI_BOT_PM_FIELD, :string)
 
         plugin.on(:topic_created) do |topic|
-          next if !topic.regular?
+          next if !topic.private_message?
           creator = topic.user
 
           # Only process if creator is not a bot or system user
@@ -149,7 +149,7 @@ module DiscourseAi
           :post,
           :llm_name,
           include_condition: -> do
-            object&.topic&.regular? && object.custom_fields[POST_AI_LLM_NAME_FIELD]
+            object&.topic&.private_message? && object.custom_fields[POST_AI_LLM_NAME_FIELD]
           end,
         ) { object.custom_fields[POST_AI_LLM_NAME_FIELD] }
 
@@ -219,7 +219,7 @@ module DiscourseAi
         plugin.add_to_serializer(
           :topic_view,
           :ai_persona_name,
-          include_condition: -> { SiteSetting.ai_bot_enabled && object.topic.regular? },
+          include_condition: -> { SiteSetting.ai_bot_enabled && object.topic.private_message? },
         ) do
           id = topic.custom_fields["ai_persona_id"]
           name = DiscourseAi::Personas::Persona.find_by(user: scope.user, id: id.to_i)&.name if id

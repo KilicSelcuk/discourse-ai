@@ -5,7 +5,7 @@ module DiscourseAi
     def can_see_summary?(target)
       return false if !SiteSetting.ai_summarization_enabled
 
-      if target.class == Topic && target.regular?
+      if target.class == Topic && target.private_message?
         allowed =
           SiteSetting.ai_pm_summarization_allowed_groups_map.any? do |group_id|
             user.group_ids.include?(group_id)
@@ -80,7 +80,7 @@ module DiscourseAi
       # In future we may add other valid targets for AI conversation sharing,
       # for now we only support topics.
       if target.is_a?(Topic)
-        return false if !target.regular?
+        return false if !target.private_message?
         return false if target.topic_allowed_groups.exists?
         allowed_user_ids = target.topic_allowed_users.pluck(:user_id)
 

@@ -70,7 +70,7 @@ module DiscourseAi
 
       def self.get_bot_user(post:, all_llm_users:, mentionables:)
         bot_user = nil
-        if post.topic.regular?
+        if post.topic.private_message?
           # this ensures that we reply using the correct llm
           # 1. if we have a preferred llm user we use that
           # 2. if we don't just take first topic allowed user
@@ -99,7 +99,7 @@ module DiscourseAi
         return if is_bot_user_id?(post.user_id)
         mentionables = nil
 
-        if post.topic.regular?
+        if post.topic.private_message?
           mentionables =
             AiPersona.allowed_modalities(user: post.user, allow_personal_messages: true)
         else
@@ -118,7 +118,7 @@ module DiscourseAi
           get_bot_user(post: post, all_llm_users: all_llm_users, mentionables: mentionables)
 
         mentions = nil
-        if mentionables.present? || (bot_user && post.topic.regular?)
+        if mentionables.present? || (bot_user && post.topic.private_message?)
           mentions = post.mentions.map(&:downcase)
 
           # in case we are replying to a post by a bot
@@ -161,7 +161,7 @@ module DiscourseAi
           end
 
           # edge case, llm was mentioned in an ai persona conversation
-          if persona_id == topic_persona_id && post.topic.regular? && persona &&
+          if persona_id == topic_persona_id && post.topic.private_message? && persona &&
                all_llm_users.present?
             if !persona.force_default_llm && mentions.present?
               mentioned_llm_user_id, _ =
@@ -434,10 +434,10 @@ module DiscourseAi
           reply_user = User.find_by(id: bot.persona.class.user_id) || reply_user
         end
 
-        stream_reply = post.topic.regular? if stream_reply.nil?
+        stream_reply = post.topic.private_message? if stream_reply.nil?
 
         # we need to ensure persona user is allowed to reply to the pm
-        if post.topic.regular? && add_user_to_pm
+        if post.topic.private_message? && add_user_to_pm
           if !post.topic.topic_allowed_users.exists?(user_id: reply_user.id)
             post.topic.topic_allowed_users.create!(user_id: reply_user.id)
           end
@@ -574,13 +574,13 @@ module DiscourseAi
 
         # since we are skipping validations and jobs we
         # may need to fix participant count
-        if reply_post && reply_post.topic && reply_post.topic.regular? &&
+        if reply_post && reply_post.topic && reply_post.topic.private_message? &&
              reply_post.topic.participant_count < 2
           reply_post.topic.update!(participant_count: 2)
         end
         post_streamer&.finish(skip_callback: true)
         publish_final_update(reply_post) if stream_reply
-        if reply_post && post.post_number == 1 && post.topic.regular? && auto_set_title
+        if reply_post && post.post_number == 1 && post.topic.private_message? && auto_set_title
           title_playground(reply_post, post.user)
         end
       end
@@ -616,7 +616,7 @@ module DiscourseAi
 
       def can_attach?(post)
         return false if bot.bot_user.nil?
-        return false if post.topic.regular? && post.post_type != Post.types[:regular]
+        return false if post.topic.private_message? && post.post_type != Post.types[:regular]
         return false if (SiteSetting.ai_bot_allowed_groups_map & post.user.group_ids).blank?
         return false if post.custom_fields[BYPASS_AI_REPLY_CUSTOM_FIELD].present?
 

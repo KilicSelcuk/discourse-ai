@@ -15,7 +15,7 @@ module DiscourseAi
 
         # Query and serialize related topics.
         plugin.add_to_class(:topic_view, :related_topics) do
-          if topic.regular? || !SiteSetting.ai_embeddings_semantic_related_topics_enabled
+          if topic.private_message? || !SiteSetting.ai_embeddings_semantic_related_topics_enabled
             return nil
           end
 
@@ -38,7 +38,7 @@ module DiscourseAi
             :related_topics,
             include_condition: -> { SiteSetting.ai_embeddings_semantic_related_topics_enabled },
           ) do
-            if object.next_page.nil? && !object.topic.regular?
+            if object.next_page.nil? && !object.topic.private_message?
               object.related_topics.topics.map do |t|
                 SuggestedTopicSerializer.new(t, scope: scope, root: false)
               end
