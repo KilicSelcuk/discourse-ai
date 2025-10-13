@@ -160,7 +160,7 @@ module DiscourseAi
           end
         end
 
-        builder.to_a(style: style || (post.topic.private_message? ? :bot : :topic))
+        builder.to_a(style: style || (post.topic.regular? ? :bot : :topic))
       end
 
       def initialize

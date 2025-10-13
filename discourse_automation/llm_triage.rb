@@ -60,7 +60,7 @@ if defined?(DiscourseAutomation)
       post = context["post"]
       next if post&.user&.bot?
 
-      if post.topic.private_message?
+      if post.topic.regular
         include_personal_messages = fields.dig("include_personal_messages", "value")
         next if !include_personal_messages
       end

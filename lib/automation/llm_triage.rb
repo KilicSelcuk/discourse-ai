@@ -218,7 +218,7 @@ module DiscourseAi
                     pm_sender,
                     title: subject,
                     raw: body,
-                    archetype: Archetype.private_message,
+                    archetype: Archetype.regular,
                     target_usernames: post.user.username,
                     skip_validations: true,
                   )
