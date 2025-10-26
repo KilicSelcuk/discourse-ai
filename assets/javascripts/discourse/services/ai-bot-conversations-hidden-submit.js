@@ -122,7 +122,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
             target_recipients: this.targetUsername, //"kompiter"
             meta_data: { ai_persona_id: this.personaId /*9*/ },
             tags: [this.targetUsername],
-            create_as_post_voting:true,
+            //create_as_post_voting:true,
             wiki: true,
           },
         });
@@ -130,7 +130,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
       // Reset uploads after successful submission
       this.inputValue = "";
 
-      this.appEvents.trigger("topic:created", {
+      this.appEvents.trigger("discourse-ai:bot-pm-created", {
         id: response.topic_id,
         slug: response.topic_slug,
         title,
