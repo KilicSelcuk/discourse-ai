@@ -23,6 +23,7 @@ discourse_ai:
     client: true
   ai_sentiment_model_configs:
     default: ""
+    secret: true
     json_schema: DiscourseAi::Sentiment::SentimentSiteSettingJsonSchema
   ai_sentiment_backfill_maximum_posts_per_hour:
     default: 2500
@@ -72,7 +73,9 @@ discourse_ai:
   ai_hugging_face_tei_reranker_endpoint_srv:
     default: ""
     hidden: true
-  ai_hugging_face_tei_reranker_api_key: ""
+  ai_hugging_face_tei_reranker_api_key:
+    default: ""
+    secret: true
   ai_google_custom_search_api_key:
     default: ""
     secret: true
@@ -574,10 +577,3 @@ discourse_ai:
   ai_artifact_max_keys_per_user_per_artifact:
     default: 100
     hidden: true
-  ai_kuaza_enabled:
-    default: false
-    client: true
-  ai_kuaza_upload_iconu:
-    default: "upload"
-  ai_kuaza_gonderme_iconu:
-    default: "paper-plane"
