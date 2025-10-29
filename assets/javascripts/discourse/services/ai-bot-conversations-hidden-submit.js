@@ -45,18 +45,17 @@ export default class AiBotConversationsHiddenSubmit extends Service {
       */
 
       // eger upload yoksa o zaman yazi alanina birseyler yazilmasi icin uyari veririz.
-      if (this.uploads && this.uploads.length
-    ) {
-      return this.dialog.alert({
-        message: i18n(
-          "discourse_ai.ai_bot.conversations.min_input_length_message",
-          { count: this.siteSettings.min_personal_message_post_length }
-        ),
-        didConfirm: () => this.focusInput(),
-        didCancel: () => this.focusInput(),
-      });
+      if (this.uploads && this.uploads.length < 1) {
+        return this.dialog.alert({
+          message: i18n(
+            "discourse_ai.ai_bot.conversations.min_input_length_message",
+            { count: this.siteSettings.min_personal_message_post_length }
+          ),
+          didConfirm: () => this.focusInput(),
+          didCancel: () => this.focusInput(),
+        });
+      }
     }
-
     // Don't submit if there are still uploads in progress
     if (uploadData.inProgressUploadsCount > 0) {
       return this.dialog.alert({
