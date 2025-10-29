@@ -329,7 +329,7 @@ export default class AiBotConversations extends Component {
 
         <div class="ai-bot-conversations__input-wrapper">
           <DButton
-            @icon="upload"
+            @icon="images"
             @action={{this.openFileUpload}}
             @title="discourse_ai.ai_bot.conversations.upload_files"
             class="btn btn-transparent ai-bot-upload-btn"
