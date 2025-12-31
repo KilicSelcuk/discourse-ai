@@ -110,7 +110,7 @@ module DiscourseAi
 
         all_llm_users =
           LlmModel
-            .where(enabled_chat_bot: true)
+            .where(id: LlmModel.enabled_chat_bot_ids)
             .joins(:user)
             .pluck("users.id", "users.username_lower")
 
@@ -506,7 +506,7 @@ module DiscourseAi
             end
 
             reply_post.update_columns(raw: "", cooked: "")
-            reply_post.post_custom_prompt&.destroy
+            reply_post.post_custom_prompt = nil
           else
             reply_post =
               PostCreator.create!(
