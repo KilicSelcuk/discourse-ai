@@ -93,7 +93,6 @@ export default class AiBotConversationsHiddenSubmit extends Service {
           tags: [
             this.isPrivate ? "Gizli" : "Genel",
             this.targetUsername,
-            this.personaId
           ],
         },
       });

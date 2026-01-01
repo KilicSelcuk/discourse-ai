@@ -541,9 +541,7 @@ body.has-ai-conversations-sidebar {
   }
 }
 
-
 // 01/01/2026 konu acma sayfasindaki gizli, genel alani icin stil kodlari.
-
 .ai-visibility-cards {
   display: flex;
   gap: 1rem;
@@ -551,6 +549,7 @@ body.has-ai-conversations-sidebar {
 
   @media (width <= 640px) {
     flex-direction: column;
+    width: 100%;
   }
 }
 
@@ -559,9 +558,9 @@ body.has-ai-conversations-sidebar {
   align-items: center;
   gap: 1rem;
   flex: 1;
-  padding: 1rem 1.25rem;
-  border-radius: 12px;
-  border: 2px solid var(--primary-low);
+  padding: auto 1.25rem;
+  border-radius: 5px;
+  border: 1px solid var(--primary-low);
   background: var(--secondary);
   cursor: pointer;
   text-align: left;
@@ -598,9 +597,10 @@ body.has-ai-conversations-sidebar {
     box-shadow: 0 4px 14px rgb(0, 0, 0, 0.12);
   }
 
+  /*
   &:active {
     transform: scale(0.98);
-  }
+  } */
 }
 
 /* 🟢 AKTİF – GENEL */

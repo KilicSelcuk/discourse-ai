@@ -359,10 +359,10 @@ export default class AiBotConversations extends Component {
   @action
   selectVisibility(value) {
     this.aiBotConversationsHiddenSubmit.isPrivate = value;
-    console.log(
+    /*console.log(
       "AI soru gizli mi?",
       this.aiBotConversationsHiddenSubmit.isPrivate
-    );
+    );*/
   }
 
   _autoExpandTextarea() {
@@ -396,6 +396,7 @@ export default class AiBotConversations extends Component {
         <div class="ai-bot-conversations__title">
           {{i18n "discourse_ai.ai_bot.conversations.header"}}
         </div>
+
         <div class="ai-visibility-cards">
 
           <button
@@ -405,10 +406,7 @@ export default class AiBotConversations extends Component {
             {{on "click" (fn this.selectVisibility false)}}
           >
             <span class="icon">
-              <DButton
-                @icon="globe"
-                class="btn btn-transparent ai-bot-upload-btn"
-              />
+              <DButton @icon="globe" class="btn btn-transparent" />
             </span>
 
             <span class="content">
@@ -426,10 +424,7 @@ export default class AiBotConversations extends Component {
             {{on "click" (fn this.selectVisibility true)}}
           >
             <span class="icon">
-              <DButton
-                @icon="lock"
-                class="btn btn-transparent ai-bot-upload-btn"
-              />
+              <DButton @icon="lock" class="btn btn-transparent" />
             </span>
 
             <span class="content">
@@ -471,7 +466,7 @@ export default class AiBotConversations extends Component {
             id="ai-bot-conversations-input"
             autofocus={{unless this.isSubmitDisabled "true"}}
             placeholder={{i18n "discourse_ai.ai_bot.conversations.placeholder"}}
-            minlength="10"
+            minlength="3"
             disabled={{if this.isSubmitDisabled true this.loading}}
             rows="1"
           />
