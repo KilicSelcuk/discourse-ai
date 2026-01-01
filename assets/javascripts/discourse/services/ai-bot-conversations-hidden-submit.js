@@ -85,7 +85,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
 
     try {
         const data = {
-          raw: rawContent + " --- " + this.isPrivate,
+          raw: rawContent,
           title,
           archetype: this.isPrivate ? "private_message" : "regular",
           target_recipients: this.targetUsername,
