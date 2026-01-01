@@ -540,3 +540,85 @@ body.has-ai-conversations-sidebar {
     display: block;
   }
 }
+
+
+// 01/01/2026 konu acma sayfasindaki gizli, genel alani icin stil kodlari.
+
+.ai-visibility-cards {
+  display: flex;
+  gap: 1rem;
+  margin: 1em 0;
+
+  @media (width <= 640px) {
+    flex-direction: column;
+  }
+}
+
+.ai-visibility-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border: 2px solid var(--primary-low);
+  background: var(--secondary);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+
+  .icon {
+    font-size: 1.8em;
+    color: var(--primary-medium);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .title {
+    font-weight: 600;
+    font-size: 1.05em;
+    color: var(--primary);
+  }
+
+  .description {
+    font-size: 0.9em;
+    color: var(--primary-medium);
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgb(0, 0, 0, 0.12);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* 🟢 AKTİF – GENEL */
+.ai-visibility-card.active {
+  border-color: var(--success);
+  background: var(--success-low);
+
+  .icon {
+    color: var(--success);
+  }
+}
+
+/* 🔴 GİZLİ */
+.ai-visibility-card.danger.active {
+  border-color: var(--danger);
+  background: var(--danger-low);
+
+  .icon {
+    color: var(--danger);
+  }
+}

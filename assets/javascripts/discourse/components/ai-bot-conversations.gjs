@@ -153,6 +153,11 @@ export default class AiBotConversations extends Component {
     }
   }
 
+  @action
+  setVisibility(value) {
+    this.aiBotConversationsHiddenSubmit.isPrivate = value;
+  }
+
   get loading() {
     return this.aiBotConversationsHiddenSubmit?.loading;
   }
@@ -351,6 +356,15 @@ export default class AiBotConversations extends Component {
     }
   }
 
+  @action
+  selectVisibility(value) {
+    this.aiBotConversationsHiddenSubmit.isPrivate = value;
+    console.log(
+      "AI soru gizli mi?",
+      this.aiBotConversationsHiddenSubmit.isPrivate
+    );
+  }
+
   _autoExpandTextarea() {
     this.textarea.style.height = "auto";
     this.textarea.style.height = this.textarea.scrollHeight + "px";
@@ -382,6 +396,52 @@ export default class AiBotConversations extends Component {
         <div class="ai-bot-conversations__title">
           {{i18n "discourse_ai.ai_bot.conversations.header"}}
         </div>
+        <div class="ai-visibility-cards">
+
+          <button
+            type="button"
+            class="ai-visibility-card
+              {{unless this.aiBotConversationsHiddenSubmit.isPrivate 'active'}}"
+            {{on "click" (fn this.selectVisibility false)}}
+          >
+            <span class="icon">
+              <DButton
+                @icon="globe"
+                class="btn btn-transparent ai-bot-upload-btn"
+              />
+            </span>
+
+            <span class="content">
+              <span class="title">Genel</span>
+              <span class="description">
+                Herkes tarafından görüntülenebilir
+              </span>
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="ai-visibility-card danger
+              {{if this.aiBotConversationsHiddenSubmit.isPrivate 'active'}}"
+            {{on "click" (fn this.selectVisibility true)}}
+          >
+            <span class="icon">
+              <DButton
+                @icon="lock"
+                class="btn btn-transparent ai-bot-upload-btn"
+              />
+            </span>
+
+            <span class="content">
+              <span class="title">Gizli</span>
+              <span class="description">
+                Sadece siz ve yetkililer görebilir
+              </span>
+            </span>
+          </button>
+
+        </div>
+
         <PluginOutlet
           @name="ai-bot-conversations-above-input"
           @outletArgs={{lazyHash
@@ -398,7 +458,7 @@ export default class AiBotConversations extends Component {
           }}
         >
           <DButton
-            @icon="images"
+            @icon="upload"
             @action={{unless this.isSubmitDisabled this.openFileUpload}}
             @disabled={{this.isSubmitDisabled}}
             @title="discourse_ai.ai_bot.conversations.upload_files"

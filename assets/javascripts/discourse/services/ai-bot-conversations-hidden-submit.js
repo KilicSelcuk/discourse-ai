@@ -14,6 +14,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
   @service siteSettings;
 
   @tracked loading = false;
+  @tracked isPrivate = false;
 
   personaId;
   targetUsername;
@@ -56,6 +57,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
         });
       }
     }
+
     // Don't submit if there are still uploads in progress
     if (uploadData.inProgressUploadsCount > 0) {
       return this.dialog.alert({
@@ -88,7 +90,11 @@ export default class AiBotConversationsHiddenSubmit extends Service {
           archetype: "private_message",
           target_recipients: this.targetUsername,
           meta_data: { ai_persona_id: this.personaId },
-          tags: [this.targetUsername],
+          tags: [
+            this.isPrivate ? "Gizli" : "Genel",
+            this.targetUsername,
+            this.personaId
+          ],
         },
       });
 
