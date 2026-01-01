@@ -85,14 +85,14 @@ export default class AiBotConversationsHiddenSubmit extends Service {
 
     try {
         const data = {
-          raw: rawContent,
+          raw: rawContent + " --- " + this.isPrivate,
           title,
           archetype: this.isPrivate ? "private_message" : "regular",
           target_recipients: this.targetUsername,
           meta_data: { ai_persona_id: this.personaId },
         };
 
-        if (this.isPrivate !== 1) {
+        if (this.isPrivate) {
           data.tags = [
             this.targetUsername,
           ].filter(Boolean);
