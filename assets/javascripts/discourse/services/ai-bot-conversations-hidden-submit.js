@@ -84,21 +84,25 @@ export default class AiBotConversationsHiddenSubmit extends Service {
     }
 
     try {
-      const response = await ajax("/posts.json", {
-        method: "POST",
-        data: {
+        const data = {
           raw: rawContent,
           title,
-          archetype: this.isPrivate ? "private_message" : "regular", // ozel mesaj ise gizleriz ve ozel mesaj olarak kaydederiz, genel se forumda yeni konu olarak acilir.
+          archetype: this.isPrivate ? "private_message" : "regular",
           target_recipients: this.targetUsername,
           meta_data: { ai_persona_id: this.personaId },
-    ...(this.isPrivate !== 1
-      ? {
-          tags: [this.targetUsername].filter(Boolean),
+        };
+
+        if (this.isPrivate !== 1) {
+          data.tags = [
+            this.targetUsername,
+          ].filter(Boolean);
         }
-      : {})
-        },
-      });
+
+        const response = await ajax("/posts.json", {
+          method: "POST",
+          data,
+        });
+
 
       // Reset uploads after successful submission
       this.inputValue = "";
