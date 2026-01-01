@@ -1014,6 +1014,10 @@ en:
           last_30_days: "Last 30 days"
           upload_files: "Upload files"
           uploads_in_progress: "Cannot submit while uploads are in progress"
+          genel_baslik: "Public"
+          genel: "It is visible and answerable to everyone."
+          gizli_baslik: "Private"
+          gizli: "Only you and the AI ​​(Artificial Intelligence) can see it."
       sentiments:
         dashboard:
           title: "Sentiment"

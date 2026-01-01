@@ -363,6 +363,9 @@ export default class AiBotConversations extends Component {
       "AI soru gizli mi?",
       this.aiBotConversationsHiddenSubmit.isPrivate
     );*/
+
+    scheduleOnce("afterRender", this, this.focusTextarea); // herhangi genel/gizli butonuna tiklanildiginda otomatik focus yapar yazi alanina ve klavye acilir.
+    
   }
 
   _autoExpandTextarea() {
@@ -410,9 +413,11 @@ export default class AiBotConversations extends Component {
             </span>
 
             <span class="content">
-              <span class="title">Genel</span>
+              <span class="title">{{i18n
+                  "discourse_ai.ai_bot.conversations.genel_baslik"
+                }}</span>
               <span class="description">
-                Herkes tarafından görüntülenebilir
+                {{i18n "discourse_ai.ai_bot.conversations.genel"}}
               </span>
             </span>
           </button>
@@ -428,9 +433,11 @@ export default class AiBotConversations extends Component {
             </span>
 
             <span class="content">
-              <span class="title">Gizli</span>
+              <span class="title">{{i18n
+                  "discourse_ai.ai_bot.conversations.gizli_baslik"
+                }}</span>
               <span class="description">
-                Sadece siz ve yetkililer görebilir
+                {{i18n "discourse_ai.ai_bot.conversations.gizli"}}
               </span>
             </span>
           </button>
