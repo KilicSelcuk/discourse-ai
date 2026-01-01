@@ -66,7 +66,9 @@ export default class AiBotConversationsHiddenSubmit extends Service {
     }
 
     this.loading = true;
-    const title = i18n("discourse_ai.ai_bot.default_pm_prefix");
+    //const title = i18n("discourse_ai.ai_bot.default_pm_prefix");
+    const saatcik = Date.now();
+    const title = '[Geçici başlık] - ' + saatcik;
 
     // Prepare the raw content with any uploads appended
     let rawContent = this.inputValue;
@@ -87,15 +89,14 @@ export default class AiBotConversationsHiddenSubmit extends Service {
         data: {
           raw: rawContent,
           title,
-          archetype: this.isPrivate ? "private_message" : "regular",
+          archetype: this.isPrivate ? "private_message" : "regular", // ozel mesaj ise gizleriz ve ozel mesaj olarak kaydederiz, genel se forumda yeni konu olarak acilir.
           target_recipients: this.targetUsername,
           meta_data: { ai_persona_id: this.personaId },
-          ...(this.isPrivate !== 1 && {
-          tags: [
-            //this.isPrivate ? "Gizli" : "Genel",
-            this.targetUsername,
-          ]
-        })
+    ...(this.isPrivate !== 1
+      ? {
+          tags: [this.targetUsername].filter(Boolean),
+        }
+      : {})
         },
       });
 
