@@ -92,7 +92,7 @@ export default class AiBotConversationsHiddenSubmit extends Service {
           meta_data: { ai_persona_id: this.personaId },
         };
 
-        if (!this.isPrivate) {
+        if (this.isPrivate === false) {
           data.tags = [
             this.targetUsername,
           ].filter(Boolean);
