@@ -861,10 +861,6 @@ tr_TR:
           last_30_days: "Son 30 gün"
           upload_files: "Dosya yükle"
           uploads_in_progress: "Yüklemeler devam ederken gönderilemiyor"
-          genel_baslik: "Genel"
-          genel: "Herkes tarafından görülebilir ve cevaplanabilir."
-          gizli_baslik: "Gizli"
-          gizli: "Sadece siz ve AI (Yapay zeka) görebilir."
       sentiments:
         dashboard:
           title: "Duyarlılık"
