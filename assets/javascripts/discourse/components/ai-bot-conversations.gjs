@@ -10,6 +10,7 @@ import { scheduleOnce } from "@ember/runloop";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
 import { TrackedArray } from "@ember-compat/tracked-built-ins";
+import { tagName } from "@ember-decorators/component";
 import { modifier } from "ember-modifier";
 import DButton from "discourse/components/d-button";
 import PluginOutlet from "discourse/components/plugin-outlet";
@@ -33,6 +34,7 @@ import DAutocompleteModifier from "discourse/modifiers/d-autocomplete";
 import { i18n } from "discourse-i18n";
 import AiPersonaLlmSelector from "discourse/plugins/discourse-ai/discourse/components/ai-persona-llm-selector";
 
+@tagName("")
 export default class AiBotConversations extends Component {
   @service aiCredits;
   @service aiBotConversationsHiddenSubmit;
@@ -384,7 +386,7 @@ export default class AiBotConversations extends Component {
   }
 
   <template>
-    <div class="ai-bot-conversations">
+    <div class="ai-bot-conversations" ...attributes>
       {{bodyClass "ai-bot-conversations-page"}}
       <AiPersonaLlmSelector
         @showLabels={{true}}
@@ -473,7 +475,7 @@ export default class AiBotConversations extends Component {
             id="ai-bot-conversations-input"
             autofocus={{unless this.isSubmitDisabled "true"}}
             placeholder={{i18n "discourse_ai.ai_bot.conversations.placeholder"}}
-            minlength="3"
+            minlength="10"
             disabled={{if this.isSubmitDisabled true this.loading}}
             rows="1"
           />
