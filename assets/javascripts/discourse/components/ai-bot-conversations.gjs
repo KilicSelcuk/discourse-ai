@@ -482,7 +482,7 @@ export default class AiBotConversations extends Component {
             placeholder={{i18n "discourse_ai.ai_bot.conversations.placeholder"}}
             minlength="10"
             disabled={{if this.isSubmitDisabled true this.loading}}
-            rows="1"
+            rows="3"
           />
           <DButton
             @action={{unless this.isSubmitDisabled this.prepareAndSubmitToBot}}
