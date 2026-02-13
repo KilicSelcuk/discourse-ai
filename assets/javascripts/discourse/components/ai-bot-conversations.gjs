@@ -17,6 +17,7 @@ import PluginOutlet from "discourse/components/plugin-outlet";
 import UserAutocompleteResults from "discourse/components/user-autocomplete-results";
 import bodyClass from "discourse/helpers/body-class";
 import concatClass from "discourse/helpers/concat-class";
+import icon from "discourse/helpers/d-icon";
 import lazyHash from "discourse/helpers/lazy-hash";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { hashtagAutocompleteOptions } from "discourse/lib/hashtag-autocomplete";
@@ -47,6 +48,7 @@ export default class AiBotConversations extends Component {
   @tracked creditStatus = null;
   @tracked selectedLlmId = null;
   @tracked uploads = new TrackedArray();
+  @tracked inputValue = "";
   // Don't track this directly - we'll get it from uppyUpload
 
   textarea = null;
@@ -218,9 +220,11 @@ export default class AiBotConversations extends Component {
 
   @action
   updateInputValue(value) {
+    const nextValue = value.target?.value || value;
+    this.inputValue = nextValue;
     this._autoExpandTextarea();
     this.aiBotConversationsHiddenSubmit.inputValue =
-      value.target?.value || value;
+      nextValue;
   }
 
   @action
@@ -361,13 +365,7 @@ export default class AiBotConversations extends Component {
   @action
   selectVisibility(value) {
     this.aiBotConversationsHiddenSubmit.isPrivate = value;
-    /*console.log(
-      "AI soru gizli mi?",
-      this.aiBotConversationsHiddenSubmit.isPrivate
-    );*/
-
-    scheduleOnce("afterRender", this, this.focusTextarea); // herhangi genel/gizli butonuna tiklanildiginda otomatik focus yapar yazi alanina ve klavye acilir.
-    
+    scheduleOnce("afterRender", this, this.focusTextarea);
   }
 
   _autoExpandTextarea() {
@@ -398,27 +396,33 @@ export default class AiBotConversations extends Component {
       />
 
       <div class="ai-bot-conversations__content-wrapper">
-        <div class="ai-bot-conversations__title">
-          {{i18n "discourse_ai.ai_bot.conversations.header"}}
+        <div class="ai-bot-conversations__hero">
+          <div class="ai-bot-conversations__title">
+            {{i18n "discourse_ai.ai_bot.conversations.header"}}
+          </div>
+          <p class="ai-bot-conversations__subtitle">
+            {{i18n "discourse_ai.ai_bot.conversations.landing_hint"}}
+          </p>
         </div>
 
-        <div class="ai-visibility-cards">
-
+        <div
+          class="ai-visibility-toggle"
+          role="group"
+          aria-label={{i18n "discourse_ai.ai_bot.conversations.visibility_toggle"}}
+        >
           <button
             type="button"
-            class="ai-visibility-card
+            class="ai-visibility-toggle__button
               {{unless this.aiBotConversationsHiddenSubmit.isPrivate 'active'}}"
             {{on "click" (fn this.selectVisibility false)}}
+            aria-pressed={{unless this.aiBotConversationsHiddenSubmit.isPrivate true false}}
           >
-            <span class="icon">
-              <DButton @icon="globe" class="btn btn-transparent" />
-            </span>
-
-            <span class="content">
-              <span class="title">{{i18n
+            <span class="ai-visibility-toggle__icon">{{icon "globe"}}</span>
+            <span class="ai-visibility-toggle__content">
+              <span class="ai-visibility-toggle__title">{{i18n
                   "discourse_ai.ai_bot.conversations.genel_baslik"
                 }}</span>
-              <span class="description">
+              <span class="ai-visibility-toggle__description">
                 {{i18n "discourse_ai.ai_bot.conversations.genel"}}
               </span>
             </span>
@@ -426,24 +430,21 @@ export default class AiBotConversations extends Component {
 
           <button
             type="button"
-            class="ai-visibility-card danger
+            class="ai-visibility-toggle__button --private
               {{if this.aiBotConversationsHiddenSubmit.isPrivate 'active'}}"
             {{on "click" (fn this.selectVisibility true)}}
+            aria-pressed={{if this.aiBotConversationsHiddenSubmit.isPrivate true false}}
           >
-            <span class="icon">
-              <DButton @icon="lock" class="btn btn-transparent" />
-            </span>
-
-            <span class="content">
-              <span class="title">{{i18n
+            <span class="ai-visibility-toggle__icon">{{icon "lock"}}</span>
+            <span class="ai-visibility-toggle__content">
+              <span class="ai-visibility-toggle__title">{{i18n
                   "discourse_ai.ai_bot.conversations.gizli_baslik"
                 }}</span>
-              <span class="description">
+              <span class="ai-visibility-toggle__description">
                 {{i18n "discourse_ai.ai_bot.conversations.gizli"}}
               </span>
             </span>
           </button>
-
         </div>
 
         <PluginOutlet
@@ -458,6 +459,7 @@ export default class AiBotConversations extends Component {
           {{this.creditLimitTooltipModifier}}
           class={{concatClass
             "ai-bot-conversations__input-wrapper"
+            (if this.inputValue.length "--has-input")
             (if this.isSubmitDisabled "--disabled")
           }}
         >

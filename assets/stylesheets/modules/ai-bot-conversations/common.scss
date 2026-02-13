@@ -134,15 +134,25 @@ body.has-ai-conversations-sidebar {
   }
 
   .ai-bot-conversations {
-    --input-max-width: 46em;
+    --chat-surface: var(--secondary);
+    --chat-surface-hover: var(--primary-very-low);
+    --chat-border: var(--primary-low);
+    --chat-radius: 1rem;
+    --chat-shadow: 0 10px 30px rgb(0 0 0 / 8%);
+    --chat-shadow-focus: 0 0 0 3px rgb(0 0 0 / 6%);
+    --input-min-height: 2.75em;
+    --input-max-width: 52em;
     display: flex;
     flex-direction: column;
     height: calc(100dvh - var(--header-offset) - 5em);
+    gap: 1rem;
 
     .persona-llm-selector {
       display: flex;
-      gap: 0.5em;
+      gap: 0.65em;
       justify-content: flex-start;
+      width: min(100%, var(--input-max-width));
+      margin-inline: auto;
 
       .select-kit-body {
         .select-kit-collection {
@@ -164,9 +174,9 @@ body.has-ai-conversations-sidebar {
 
         label {
           font-size: var(--font-down-1);
-          font-weight: 300;
-          margin-left: 1em;
-          margin-bottom: 0;
+          font-weight: 500;
+          margin-left: 0.15em;
+          margin-bottom: 0.15em;
         }
 
         .name {
@@ -179,13 +189,15 @@ body.has-ai-conversations-sidebar {
       .btn {
         display: flex;
         justify-content: flex-start;
-        background-color: transparent;
-        font-weight: bold;
+        background-color: var(--chat-surface);
+        border: 1px solid var(--chat-border);
+        border-radius: 0.75rem;
+        font-weight: 600;
       }
 
       .btn:hover,
       .btn:focus {
-        background-color: transparent;
+        background-color: var(--chat-surface-hover);
         color: var(--primary);
       }
 
@@ -202,34 +214,133 @@ body.has-ai-conversations-sidebar {
       align-items: center;
       justify-content: center;
       flex: 1 1 auto;
-      gap: 0.5em;
+      gap: 0.85rem;
+      width: min(100%, calc(var(--input-max-width) + 6rem));
+      margin-inline: auto;
 
       .loading-container {
         display: contents;
       }
     }
 
-    &__title {
-      font-size: var(--font-up-5);
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 0.25em;
-      line-height: var(--line-height-medium);
+    &__hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      width: min(100%, var(--input-max-width));
+      margin-top: -4.5rem;
 
-      // optical centering for layout balance
-      @media screen and (height >= 600px) {
-        margin-top: -6em;
+      @include viewport.until(md) {
+        margin-top: 0;
+      }
+    }
+
+    &__title {
+      font-size: var(--font-up-4);
+      font-weight: 700;
+      text-align: center;
+      margin: 0;
+      line-height: var(--line-height-medium);
+    }
+
+    &__subtitle {
+      margin: 0;
+      color: var(--primary-medium);
+      text-align: center;
+      font-size: var(--font-0);
+      line-height: var(--line-height-medium);
+    }
+
+    .ai-visibility-toggle {
+      width: min(100%, var(--input-max-width));
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+      padding: 0.35rem;
+      border-radius: calc(var(--chat-radius) - 0.25rem);
+      border: 1px solid var(--chat-border);
+      background: var(--chat-surface);
+
+      @include viewport.until(sm) {
+        grid-template-columns: 1fr;
+      }
+
+      &__button {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        border: 1px solid transparent;
+        border-radius: 0.75rem;
+        background: transparent;
+        color: var(--primary);
+        padding: 0.75rem 0.85rem;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease,
+          color 0.2s ease;
+
+        &:hover,
+        &:focus-visible {
+          background: var(--chat-surface-hover);
+        }
+
+        &.active {
+          background: var(--tertiary-low);
+          border-color: var(--tertiary-300);
+
+          .ai-visibility-toggle__icon,
+          .ai-visibility-toggle__title {
+            color: var(--tertiary);
+          }
+        }
+
+        &.--private.active {
+          background: var(--danger-low);
+          border-color: var(--danger-low-mid);
+
+          .ai-visibility-toggle__icon,
+          .ai-visibility-toggle__title {
+            color: var(--danger);
+          }
+        }
+      }
+
+      &__icon {
+        display: inline-flex;
+        font-size: var(--font-up-1);
+        color: var(--primary-medium);
+      }
+
+      &__content {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+
+      &__title {
+        font-size: var(--font-0);
+        font-weight: 700;
+        line-height: var(--line-height-small);
+      }
+
+      &__description {
+        color: var(--primary-medium);
+        font-size: var(--font-down-1);
+        margin-top: 0.2rem;
+        line-height: var(--line-height-small);
       }
     }
 
     &__input-wrapper {
-      --input-min-height: 2.5em;
       display: flex;
-      align-items: end;
+      align-items: flex-end;
       width: 100%;
-      border: 1px solid var(--primary-low);
-      border-radius: var(--d-input-border-radius);
-      background-color: var(--d-input-bg-color);
+      border: 1px solid var(--chat-border);
+      border-radius: var(--chat-radius);
+      background-color: var(--chat-surface);
+      box-shadow: var(--chat-shadow);
+      padding: 0.35rem 0.45rem;
 
       &:has(textarea[disabled]) {
         background: var(--d-input-bg-color--disabled);
@@ -246,40 +357,54 @@ body.has-ai-conversations-sidebar {
       }
 
       @include viewport.from(sm) {
-        width: 80%;
+        width: 85%;
         max-width: var(--input-max-width);
       }
 
       &:focus-within {
         border-color: var(--tertiary);
+        box-shadow: var(--chat-shadow), var(--chat-shadow-focus);
       }
 
       .ai-conversation-submit {
+        align-self: flex-end;
+
         .d-icon {
           color: var(--primary-medium);
-          padding: 0.5em;
+          padding: 0.55em;
         }
 
         &:hover,
         &:focus-visible {
+          background: var(--tertiary-low);
+
           .d-icon {
-            color: var(--primary-medium);
+            color: var(--tertiary);
           }
+        }
+      }
+
+      &.--has-input {
+        .ai-conversation-submit .d-icon {
+          color: var(--tertiary);
         }
       }
 
       .ai-bot-upload-btn {
         min-height: var(--input-min-height);
         border: none;
+        align-self: flex-end;
 
         .d-icon {
-          background: var(--primary-low);
-          padding: 0.5em;
+          background: var(--primary-very-low);
+          padding: 0.5rem;
           border-radius: 100%;
         }
 
         &:hover,
         &:focus-visible {
+          background: var(--chat-surface-hover);
+
           .d-icon {
             color: var(--primary);
           }
@@ -296,11 +421,10 @@ body.has-ai-conversations-sidebar {
         resize: none;
         max-height: 30vh;
         min-height: var(--input-min-height);
-        border-radius: 0 var(--d-button-border-radius)
-          var(--d-button-border-radius) 0;
+        border-radius: 0;
         border: none;
-        padding-block: 0.8em;
-        padding-inline: 0;
+        padding-block: 0.75rem;
+        padding-inline: 0.35rem;
         scrollbar-color: var(--scrollbarThumbBg) var(--scrollbarBg);
         scrollbar-width: thin;
         transition: scrollbar-color 0.25s ease-in-out;
@@ -339,31 +463,18 @@ body.has-ai-conversations-sidebar {
           outline: none;
           border-color: var(--tertiary);
         }
-
-        &:not(:placeholder-shown) + .ai-conversation-submit {
-          will-change: scale;
-
-          &:hover,
-          &:focus-visible {
-            transform: scale(1.2);
-          }
-
-          .d-icon {
-            color: var(--tertiary);
-          }
-        }
       }
     }
 
     .ai-disclaimer {
       text-align: center;
       font-size: var(--font-down-1);
-      color: var(--primary-700);
+      color: var(--primary-medium);
       margin: 0;
+      width: min(100%, var(--input-max-width));
 
       @include viewport.from(sm) {
-        width: 80%;
-        max-width: var(--input-max-width);
+        max-width: calc(var(--input-max-width) - 2rem);
       }
     }
 
@@ -384,22 +495,22 @@ body.has-ai-conversations-sidebar {
     }
 
     .ai-bot-conversations__uploads-container {
-      width: 100%;
+      width: min(100%, var(--input-max-width));
       display: flex;
       flex-wrap: wrap;
       gap: 0.5em;
 
       @include viewport.from(sm) {
-        width: 80%;
-        max-width: var(--input-max-width);
+        max-width: calc(var(--input-max-width) - 2rem);
       }
     }
 
     .ai-bot-upload {
       display: flex;
       align-items: center;
-      border: 1px solid var(--primary-low);
+      border: 1px solid var(--chat-border);
       border-radius: 10em;
+      background: var(--chat-surface);
       padding-left: 0.75em;
       color: var(--primary-high);
       font-size: var(--font-down-2);
@@ -541,84 +652,4 @@ body.has-ai-conversations-sidebar {
   }
 }
 
-// 01/01/2026 konu acma sayfasindaki gizli, genel alani icin stil kodlari.
-.ai-visibility-cards {
-  display: flex;
-  gap: 1rem;
-  margin: 1em 0;
 
-  @media (width <= 640px) {
-    flex-direction: column;
-    width: 100%;
-  }
-}
-
-.ai-visibility-card {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex: 1;
-  padding: auto 1.25rem;
-  border-radius: 5px;
-  border: 1px solid var(--primary-low);
-  background: var(--secondary);
-  cursor: pointer;
-  text-align: left;
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease,
-    border-color 0.15s ease,
-    background-color 0.15s ease;
-
-  .icon {
-    font-size: 1.8em;
-    color: var(--primary-medium);
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-  }
-
-  .title {
-    font-weight: 600;
-    font-size: 1.05em;
-    color: var(--primary);
-  }
-
-  .description {
-    font-size: 0.9em;
-    color: var(--primary-medium);
-  }
-
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 14px rgb(0, 0, 0, 0.12);
-  }
-
-  /*
-  &:active {
-    transform: scale(0.98);
-  } */
-}
-
-/* 🟢 AKTİF – GENEL */
-.ai-visibility-card.active {
-  border-color: var(--success);
-  background: var(--success-low);
-
-  .icon {
-    color: var(--success);
-  }
-}
-
-/* 🔴 GİZLİ */
-.ai-visibility-card.danger.active {
-  border-color: var(--danger);
-  background: var(--danger-low);
-
-  .icon {
-    color: var(--danger);
-  }
-}

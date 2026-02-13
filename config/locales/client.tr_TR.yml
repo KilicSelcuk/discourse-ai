@@ -840,6 +840,8 @@ tr_TR:
           mixtral-8x7B-Instruct-V0:
             "1": "Mixtral-8x7B V0.1"
         conversations:
+          landing_hint: 'YZ ile yeni bir konusma baslatin.'
+          visibility_toggle: 'Konusma gorunurlugu'
           header: "Nasıl yardımcı olabilirim?"
           submit: "Soru gönder"
           disclaimer: "Üretken YZ, hata yapabilir. Önemli bilgileri doğrulayın."
@@ -916,3 +918,4 @@ tr_TR:
           title: "YZ Bayraklı gönderi"
         reviewable_ai_chat_message:
           title: "YZ Bayraklı sohbet mesajı"
+
