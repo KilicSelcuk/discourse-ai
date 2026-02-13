@@ -386,15 +386,6 @@ export default class AiBotConversations extends Component {
   <template>
     <div class="ai-bot-conversations" ...attributes>
       {{bodyClass "ai-bot-conversations-page"}}
-      <AiPersonaLlmSelector
-        @showLabels={{true}}
-        @setPersonaId={{this.setPersonaId}}
-        @setLlmId={{this.setLlmId}}
-        @setTargetRecipient={{this.setTargetRecipient}}
-        @personaName={{@controller.persona}}
-        @llmName={{@controller.llm}}
-      />
-
       <div class="ai-bot-conversations__content-wrapper">
         <div class="ai-bot-conversations__hero">
           <div class="ai-bot-conversations__title">
@@ -497,6 +488,15 @@ export default class AiBotConversations extends Component {
             {{didInsert this.registerFileInput}}
           />
         </div>
+
+        <AiPersonaLlmSelector
+          @showLabels={{true}}
+          @setPersonaId={{this.setPersonaId}}
+          @setLlmId={{this.setLlmId}}
+          @setTargetRecipient={{this.setTargetRecipient}}
+          @personaName={{@controller.persona}}
+          @llmName={{@controller.llm}}
+        />
 
         <p class="ai-disclaimer">
           {{i18n "discourse_ai.ai_bot.conversations.disclaimer"}}

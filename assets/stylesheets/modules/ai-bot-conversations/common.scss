@@ -262,10 +262,6 @@ body.has-ai-conversations-sidebar {
       border: 1px solid var(--chat-border);
       background: var(--chat-surface);
 
-      @include viewport.until(sm) {
-        grid-template-columns: 1fr;
-      }
-
       &__button {
         display: flex;
         align-items: center;
@@ -523,6 +519,55 @@ body.has-ai-conversations-sidebar {
       &:focus-visible {
         .d-icon {
           color: var(--danger);
+        }
+      }
+    }
+
+    @include viewport.until(sm) {
+      .persona-llm-selector {
+        gap: 0.35rem;
+
+        &__selection-wrapper {
+          flex: 1 1 calc(50% - 0.2rem);
+          min-width: 0;
+        }
+
+        .btn {
+          min-height: 2rem;
+          padding-inline: 0.45rem;
+          font-size: var(--font-down-1);
+        }
+
+        .select-kit-header-wrapper {
+          padding-inline: 0.45rem;
+        }
+      }
+
+      .ai-visibility-toggle {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.35rem;
+        padding: 0.25rem;
+
+        &__button {
+          padding: 0.5rem 0.55rem;
+          min-height: 2rem;
+          justify-content: center;
+        }
+
+        &__icon {
+          font-size: var(--font-down-1);
+        }
+
+        &__content {
+          align-items: center;
+        }
+
+        &__title {
+          font-size: var(--font-down-1);
+        }
+
+        &__description {
+          display: none;
         }
       }
     }
