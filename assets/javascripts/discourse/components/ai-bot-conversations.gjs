@@ -396,46 +396,58 @@ export default class AiBotConversations extends Component {
           </p>
         </div>
 
-        <div
-          class="ai-visibility-toggle"
-          role="group"
-          aria-label={{i18n "discourse_ai.ai_bot.conversations.visibility_toggle"}}
-        >
-          <button
-            type="button"
-            class="ai-visibility-toggle__button
-              {{unless this.aiBotConversationsHiddenSubmit.isPrivate 'active'}}"
-            {{on "click" (fn this.selectVisibility false)}}
-            aria-pressed={{unless this.aiBotConversationsHiddenSubmit.isPrivate true false}}
+        <div class="ai-controls-row">
+          <div class="ai-controls-row__selector">
+            <AiPersonaLlmSelector
+              @showLabels={{false}}
+              @setPersonaId={{this.setPersonaId}}
+              @setLlmId={{this.setLlmId}}
+              @setTargetRecipient={{this.setTargetRecipient}}
+              @personaName={{@controller.persona}}
+              @llmName={{@controller.llm}}
+            />
+          </div>
+          <div
+            class="ai-visibility-toggle"
+            role="group"
+            aria-label={{i18n "discourse_ai.ai_bot.conversations.visibility_toggle"}}
           >
-            <span class="ai-visibility-toggle__icon">{{icon "globe"}}</span>
-            <span class="ai-visibility-toggle__content">
-              <span class="ai-visibility-toggle__title">{{i18n
-                  "discourse_ai.ai_bot.conversations.genel_baslik"
-                }}</span>
-              <span class="ai-visibility-toggle__description">
-                {{i18n "discourse_ai.ai_bot.conversations.genel"}}
+            <button
+              type="button"
+              class="ai-visibility-toggle__button
+                {{unless this.aiBotConversationsHiddenSubmit.isPrivate 'active'}}"
+              {{on "click" (fn this.selectVisibility false)}}
+              aria-pressed={{unless this.aiBotConversationsHiddenSubmit.isPrivate true false}}
+            >
+              <span class="ai-visibility-toggle__icon">{{icon "globe"}}</span>
+              <span class="ai-visibility-toggle__content">
+                <span class="ai-visibility-toggle__title">{{i18n
+                    "discourse_ai.ai_bot.conversations.genel_baslik"
+                  }}</span>
+                <span class="ai-visibility-toggle__description">
+                  {{i18n "discourse_ai.ai_bot.conversations.genel"}}
+                </span>
               </span>
-            </span>
-          </button>
+            </button>
 
-          <button
-            type="button"
-            class="ai-visibility-toggle__button --private
-              {{if this.aiBotConversationsHiddenSubmit.isPrivate 'active'}}"
-            {{on "click" (fn this.selectVisibility true)}}
-            aria-pressed={{if this.aiBotConversationsHiddenSubmit.isPrivate true false}}
-          >
-            <span class="ai-visibility-toggle__icon">{{icon "lock"}}</span>
-            <span class="ai-visibility-toggle__content">
-              <span class="ai-visibility-toggle__title">{{i18n
-                  "discourse_ai.ai_bot.conversations.gizli_baslik"
-                }}</span>
-              <span class="ai-visibility-toggle__description">
-                {{i18n "discourse_ai.ai_bot.conversations.gizli"}}
+            <button
+              type="button"
+              class="ai-visibility-toggle__button --private
+                {{if this.aiBotConversationsHiddenSubmit.isPrivate 'active'}}"
+              {{on "click" (fn this.selectVisibility true)}}
+              aria-pressed={{if this.aiBotConversationsHiddenSubmit.isPrivate true false}}
+            >
+              <span class="ai-visibility-toggle__icon">{{icon "lock"}}</span>
+              <span class="ai-visibility-toggle__content">
+                <span class="ai-visibility-toggle__title">{{i18n
+                    "discourse_ai.ai_bot.conversations.gizli_baslik"
+                  }}</span>
+                <span class="ai-visibility-toggle__description">
+                  {{i18n "discourse_ai.ai_bot.conversations.gizli"}}
+                </span>
               </span>
-            </span>
-          </button>
+            </button>
+          </div>
         </div>
 
         <PluginOutlet
@@ -488,15 +500,6 @@ export default class AiBotConversations extends Component {
             {{didInsert this.registerFileInput}}
           />
         </div>
-
-        <AiPersonaLlmSelector
-          @showLabels={{true}}
-          @setPersonaId={{this.setPersonaId}}
-          @setLlmId={{this.setLlmId}}
-          @setTargetRecipient={{this.setTargetRecipient}}
-          @personaName={{@controller.persona}}
-          @llmName={{@controller.llm}}
-        />
 
         <p class="ai-disclaimer">
           {{i18n "discourse_ai.ai_bot.conversations.disclaimer"}}

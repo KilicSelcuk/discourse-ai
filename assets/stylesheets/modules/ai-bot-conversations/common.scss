@@ -252,8 +252,28 @@ body.has-ai-conversations-sidebar {
       line-height: var(--line-height-medium);
     }
 
+    .ai-controls-row {
+      width: calc(100% - 20px);
+      margin-inline: 10px;
+      max-width: var(--input-max-width);
+      display: flex;
+      gap: 0.5rem;
+      align-items: stretch;
+      flex-wrap: nowrap;
+
+      &__selector {
+        flex: 1 1 52%;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+      }
+    }
+
     .ai-visibility-toggle {
-      width: min(100%, var(--input-max-width));
+      width: auto;
+      margin-inline: 0;
+      max-width: none;
+      flex: 1 1 48%;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0.5rem;
@@ -331,7 +351,9 @@ body.has-ai-conversations-sidebar {
     &__input-wrapper {
       display: flex;
       align-items: flex-end;
-      width: 100%;
+      width: calc(100% - 20px);
+      margin-inline: 10px;
+      max-width: var(--input-max-width);
       border: 1px solid var(--chat-border);
       border-radius: var(--chat-radius);
       background-color: var(--chat-surface);
@@ -350,11 +372,6 @@ body.has-ai-conversations-sidebar {
         .btn {
           pointer-events: none;
         }
-      }
-
-      @include viewport.from(sm) {
-        width: 85%;
-        max-width: var(--input-max-width);
       }
 
       &:focus-within {
@@ -524,32 +541,41 @@ body.has-ai-conversations-sidebar {
     }
 
     @include viewport.until(sm) {
-      .persona-llm-selector {
+      .ai-controls-row {
         gap: 0.35rem;
+      }
+
+      .persona-llm-selector {
+        width: 100%;
+        margin-inline: 0;
+        gap: 0.3rem;
+        flex-wrap: nowrap;
 
         &__selection-wrapper {
-          flex: 1 1 calc(50% - 0.2rem);
+          flex: 1 1 50%;
           min-width: 0;
+        }
+
+        .select-kit-header-wrapper {
+          padding-inline: 0.35rem;
+          min-height: 2rem;
+          font-size: var(--font-down-2);
         }
 
         .btn {
           min-height: 2rem;
-          padding-inline: 0.45rem;
-          font-size: var(--font-down-1);
-        }
-
-        .select-kit-header-wrapper {
-          padding-inline: 0.45rem;
+          padding-inline: 0.35rem;
+          font-size: var(--font-down-2);
         }
       }
 
       .ai-visibility-toggle {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 0.35rem;
-        padding: 0.25rem;
+        padding: 0.2rem;
 
         &__button {
-          padding: 0.5rem 0.55rem;
+          padding: 0.4rem 0.45rem;
           min-height: 2rem;
           justify-content: center;
         }
