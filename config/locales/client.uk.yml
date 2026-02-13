@@ -225,6 +225,8 @@ uk:
       default_llm:
         title: "Модель LLM за замовчуванням"
         description: "Модель LLM за замовчуванням, яка використовуватиметься для всіх функцій ШІ. Вона використовуватиметься, якщо в конфігурації функції або персоні не вказано LLM. Якщо LLM за замовчуванням не вказано, буде використано останню створену LLM."
+      llm_selector:
+        none: "Немає"
       features:
         short_title: "Особливості"
         description: "Це функції штучного інтелекту, доступні відвідувачам вашого сайту. Їх можна налаштувати для використання певних персон та LLM, а також контролювати доступ до них за групами."
@@ -325,6 +327,7 @@ uk:
           image_caption: "Зображення підписів"
           translator: "Перекладач"
           post_illustrator: "Ілюстратор постів"
+          chat_thread_titles: "Назви тем чату"
           setting_groups:
             access_permissions: "Доступ та дозволи"
             enabled_features: "Увімкнені функції"
@@ -664,6 +667,15 @@ uk:
           title: "Тест інструменту ШІ"
           run: "Запустити тест"
           result: "Результат тесту"
+      secrets:
+        short_title: "Дані доступу"
+        name: "Імʼя"
+        secret: "Значення"
+        back: "Назад"
+        save: "Зберегти"
+        edit: "Редагувати"
+        delete: "Видалити"
+        embedding: "Взаємодія"
       llms:
         short_title: "LLMs"
         no_llms: "Ще немає LLM"
@@ -735,7 +747,16 @@ uk:
           anthropic-claude-sonnet-4-5: "Оптимальний баланс швидкості та витрат"
           anthropic-claude-haiku-4-5: "Швидко та економічно ефективно"
           google-gemini-3-pro: "Найрозумніша модель Google"
+          google-gemini-3-flash: "Швидко та економічно ефективно з мультимодальним мисленням"
+          open_ai-gpt-5-2: "Флагманська модель OpenAI, добре підходить для вирішення проблем у різних доменах"
+          open_ai-gpt-5-mini: "Забезпечує баланс між інтелектом, швидкістю та вартістю"
           open_ai-gpt-5-nano: "Найшвидша та найекономічніша модель GPT-5"
+          open_router-deepseek-deepseek-v3-2: "Остання високопродуктивна модель DeepSeek"
+          open_router-moonshotai-kimi-k2-5: "Мультимодальна модель Moonshot з можливостями технічного зору"
+          open_router-x-ai-grok-4-fast: "Флагманська модель xAI з функцією бачення"
+          open_router-minimax-minimax-m2-1: "Мультимодальна модель MiniMax з широким контекстом"
+          open_router-z-ai-glm-4-7: "Мультимодальна модель Z-AI із баченням"
+          open_router-arcee-ai-trinity-large-preview-free: "Безкоштовна модель з відкритим вихідним кодом від Arcee AI"
         preseeded_model_description: "Попередньо налаштована модель з відкритим кодом, що використовує %{model}"
         configured:
           title: "Налаштовані LLM"
