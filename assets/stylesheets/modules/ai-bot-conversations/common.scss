@@ -253,7 +253,7 @@ body.has-ai-conversations-sidebar {
     }
 
     .ai-controls-row {
-      width: calc(100% - 20px);
+      width: calc(100% - 10px);
       margin-inline: 10px;
       max-width: var(--input-max-width);
       display: flex;
@@ -262,7 +262,7 @@ body.has-ai-conversations-sidebar {
       flex-wrap: nowrap;
 
       &__selector {
-        flex: 1 1 52%;
+        //flex: 1 1 52%;
         min-width: 0;
         display: flex;
         align-items: center;
@@ -273,7 +273,7 @@ body.has-ai-conversations-sidebar {
       width: auto;
       margin-inline: 0;
       max-width: none;
-      flex: 1 1 48%;
+      //flex: 1 1 48%;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0.5rem;
