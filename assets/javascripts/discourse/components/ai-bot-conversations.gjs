@@ -397,16 +397,7 @@ export default class AiBotConversations extends Component {
         </div>
 
         <div class="ai-controls-row">
-          <div class="ai-controls-row__selector">
-            <AiPersonaLlmSelector
-              @showLabels={{false}}
-              @setPersonaId={{this.setPersonaId}}
-              @setLlmId={{this.setLlmId}}
-              @setTargetRecipient={{this.setTargetRecipient}}
-              @personaName={{@controller.persona}}
-              @llmName={{@controller.llm}}
-            />
-          </div>
+
           <div
             class="ai-visibility-toggle"
             role="group"
@@ -447,6 +438,16 @@ export default class AiBotConversations extends Component {
                 </span>
               </span>
             </button>
+          </div>
+                    <div class="ai-controls-row__selector">
+            <AiPersonaLlmSelector
+              @showLabels={{false}}
+              @setPersonaId={{this.setPersonaId}}
+              @setLlmId={{this.setLlmId}}
+              @setTargetRecipient={{this.setTargetRecipient}}
+              @personaName={{@controller.persona}}
+              @llmName={{@controller.llm}}
+            />
           </div>
         </div>
 
