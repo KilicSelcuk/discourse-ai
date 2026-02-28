@@ -17,6 +17,7 @@ import PluginOutlet from "discourse/components/plugin-outlet";
 import UserAutocompleteResults from "discourse/components/user-autocomplete-results";
 import bodyClass from "discourse/helpers/body-class";
 import concatClass from "discourse/helpers/concat-class";
+import icon from "discourse/helpers/d-icon";
 import lazyHash from "discourse/helpers/lazy-hash";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { hashtagAutocompleteOptions } from "discourse/lib/hashtag-autocomplete";
