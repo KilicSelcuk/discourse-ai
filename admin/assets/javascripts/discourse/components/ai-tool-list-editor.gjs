@@ -11,6 +11,7 @@ import DButton from "discourse/components/d-button";
 import DPageSubheader from "discourse/components/d-page-subheader";
 import DropdownMenu from "discourse/components/dropdown-menu";
 import DMenu from "discourse/float-kit/components/d-menu";
+import icon from "discourse/helpers/d-icon";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { removeValueFromArray } from "discourse/lib/array-tools";
@@ -82,6 +83,23 @@ export default class AiToolListEditor extends Component {
         queryParams,
       }
     );
+  }
+
+  credentialStatus(tool) {
+    const contracts = tool.secret_contracts || [];
+    if (contracts.length === 0) {
+      return [];
+    }
+
+    const bindings = tool.secret_bindings || [];
+    const boundAliases = new Set(
+      bindings.filter((b) => b.alias && b.ai_secret_id).map((b) => b.alias)
+    );
+
+    return contracts.map((contract) => ({
+      alias: contract.alias,
+      bound: boundAliases.has(contract.alias),
+    }));
   }
 
   @action
@@ -252,8 +270,8 @@ export default class AiToolListEditor extends Component {
       </DPageSubheader>
 
       {{#if @tools.content}}
-        <table class="d-admin-table ai-tool-list-editor">
-          <thead>
+        <table class="d-table ai-tool-list-editor">
+          <thead class="d-table__header">
             <th>{{i18n "discourse_ai.tools.name"}}</th>
             <th></th>
           </thead>
@@ -261,9 +279,9 @@ export default class AiToolListEditor extends Component {
             {{#each @tools.content as |tool|}}
               <tr
                 data-tool-id={{tool.id}}
-                class="ai-tool-list__row d-admin-row__content"
+                class="ai-tool-list__row d-table__row"
               >
-                <td class="d-admin-row__overview">
+                <td class="d-table__cell --overview">
                   <div class="ai-tool-list__name-with-description">
                     <div class="ai-tool-list__name">
                       <strong>
@@ -273,9 +291,35 @@ export default class AiToolListEditor extends Component {
                     <div class="ai-tool-list__description">
                       {{tool.description}}
                     </div>
+                    {{#if tool.secret_contracts.length}}
+                      <div class="ai-tool-list__credentials">
+                        {{#each (this.credentialStatus tool) as |cred|}}
+                          <span
+                            class="ai-tool-list__credential-badge
+                              {{if
+                                cred.bound
+                                'ai-tool-list__credential-badge--bound'
+                                'ai-tool-list__credential-badge--missing'
+                              }}"
+                          >
+                            {{#if cred.bound}}
+                              {{icon "check"}}
+                            {{else}}
+                              {{icon "triangle-exclamation"}}
+                            {{/if}}
+                            {{cred.alias}}
+                            {{#unless cred.bound}}
+                              <span class="ai-tool-list__credential-not-set">
+                                {{i18n "discourse_ai.tools.credential_not_set"}}
+                              </span>
+                            {{/unless}}
+                          </span>
+                        {{/each}}
+                      </div>
+                    {{/if}}
                   </div>
                 </td>
-                <td class="d-admin-row__controls">
+                <td class="d-table__cell --controls">
                   <LinkTo
                     @route="adminPlugins.show.discourse-ai-tools.edit"
                     @model={{tool}}

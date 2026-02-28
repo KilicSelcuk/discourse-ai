@@ -17,7 +17,6 @@ import PluginOutlet from "discourse/components/plugin-outlet";
 import UserAutocompleteResults from "discourse/components/user-autocomplete-results";
 import bodyClass from "discourse/helpers/body-class";
 import concatClass from "discourse/helpers/concat-class";
-import icon from "discourse/helpers/d-icon";
 import lazyHash from "discourse/helpers/lazy-hash";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { hashtagAutocompleteOptions } from "discourse/lib/hashtag-autocomplete";
@@ -220,11 +219,9 @@ export default class AiBotConversations extends Component {
 
   @action
   updateInputValue(value) {
-    const nextValue = value.target?.value || value;
-    this.inputValue = nextValue;
     this._autoExpandTextarea();
     this.aiBotConversationsHiddenSubmit.inputValue =
-      nextValue;
+      value.target?.value || value;
   }
 
   @action
@@ -463,7 +460,6 @@ export default class AiBotConversations extends Component {
           {{this.creditLimitTooltipModifier}}
           class={{concatClass
             "ai-bot-conversations__input-wrapper"
-            (if this.inputValue.length "--has-input")
             (if this.isSubmitDisabled "--disabled")
           }}
         >
@@ -483,7 +479,7 @@ export default class AiBotConversations extends Component {
             placeholder={{i18n "discourse_ai.ai_bot.conversations.placeholder"}}
             minlength="10"
             disabled={{if this.isSubmitDisabled true this.loading}}
-            rows="3"
+            rows="1"
           />
           <DButton
             @action={{unless this.isSubmitDisabled this.prepareAndSubmitToBot}}
