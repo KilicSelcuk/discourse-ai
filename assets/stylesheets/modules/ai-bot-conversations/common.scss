@@ -222,6 +222,85 @@ body.has-ai-conversations-sidebar {
       }
     }
 
+    .ai-visibility-toggle {
+      width: auto;
+      margin-inline: 0;
+      max-width: none;
+      //flex: 1 1 48%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+      padding: 0.35rem;
+      border-radius: calc(var(--chat-radius) - 0.25rem);
+      border: 1px solid var(--chat-border);
+      background: var(--chat-surface);
+
+      &__button {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        border: 1px solid transparent;
+        border-radius: 0.75rem;
+        background: transparent;
+        color: var(--primary);
+        padding: 0.75rem 0.85rem;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease,
+          color 0.2s ease;
+
+        &:hover,
+        &:focus-visible {
+          background: var(--chat-surface-hover);
+        }
+
+        &.active {
+          background: var(--tertiary-low);
+          border-color: var(--tertiary-300);
+
+          .ai-visibility-toggle__icon,
+          .ai-visibility-toggle__title {
+            color: var(--tertiary);
+          }
+        }
+
+        &.--private.active {
+          background: var(--danger-low);
+          border-color: var(--danger-low-mid);
+
+          .ai-visibility-toggle__icon,
+          .ai-visibility-toggle__title {
+            color: var(--danger);
+          }
+        }
+      }
+
+      &__icon {
+        display: inline-flex;
+        font-size: var(--font-up-1);
+        color: var(--primary-medium);
+      }
+
+      &__content {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+
+      &__title {
+        font-size: var(--font-0);
+        font-weight: 700;
+        line-height: var(--line-height-small);
+      }
+
+      &__description {
+        color: var(--primary-medium);
+        font-size: var(--font-down-1);
+        margin-top: 0.2rem;
+        line-height: var(--line-height-small);
+      }
+    }
+
     &__input-wrapper {
       --input-min-height: 2.5em;
       display: flex;
