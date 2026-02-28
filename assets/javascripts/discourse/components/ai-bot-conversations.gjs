@@ -389,9 +389,6 @@ export default class AiBotConversations extends Component {
           <div class="ai-bot-conversations__title">
             {{i18n "discourse_ai.ai_bot.conversations.header"}}
           </div>
-          <p class="ai-bot-conversations__subtitle">
-            {{i18n "discourse_ai.ai_bot.conversations.landing_hint"}}
-          </p>
         </div>
 
         <div class="ai-controls-row">
