@@ -222,6 +222,24 @@ body.has-ai-conversations-sidebar {
       }
     }
 
+
+    .ai-controls-row {
+      width: calc(100% - 10px);
+      margin-inline: 10px;
+      max-width: var(--input-max-width);
+      display: flex;
+      gap: 0.5rem;
+      align-items: stretch;
+      flex-wrap: nowrap;
+
+      &__selector {
+        //flex: 1 1 52%;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+      }
+    }
+
     .ai-visibility-toggle {
       width: auto;
       margin-inline: 0;
@@ -506,6 +524,39 @@ body.has-ai-conversations-sidebar {
         display: none;
       }
     }
+    
+      .ai-controls-row {
+        gap: 0.45rem;
+      }
+
+      .persona-llm-selector {
+        width: 100%;
+        margin-inline: 0;
+        gap: 0.4rem;
+        flex-wrap: nowrap;
+
+        &__selection-wrapper {
+          flex: 1 1 50%;
+          min-width: 0;
+        }
+
+        .select-kit-header-wrapper {
+          padding-inline: 0.55rem;
+          min-height: var(--ai-mobile-control-height);
+          font-size: var(--font-up-1);
+          border-radius: var(--ai-mobile-control-radius);
+          line-height: var(--ai-mobile-control-line-height);
+        }
+
+        .btn {
+          min-height: var(--ai-mobile-control-height);
+          padding-inline: 0.55rem;
+          font-size: var(--font-down-1);
+          border-radius: var(--ai-mobile-control-radius);
+          line-height: var(--ai-mobile-control-line-height);
+        }
+      }
+
             .ai-visibility-toggle {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 0.4rem;
